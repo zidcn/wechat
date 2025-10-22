@@ -8,19 +8,7 @@ defmodule WeChat.Requester.OfficialAccount do
   BaseUrl: "https://api.weixin.qq.com"
   ```
   """
-  use Tesla, only: [:get, :post]
-
   @opts Application.compile_env(:wechat, __MODULE__, [])
-
-  if Mix.env() == :test do
-    adapter Tesla.Mock
-  else
-    @adapter_options @opts
-                     |> Keyword.get(:adapter_options, pool_timeout: 5_000, receive_timeout: 5_000)
-                     |> Keyword.put(:name, WeChat.Finch)
-    adapter Tesla.Adapter.Finch, @adapter_options
-    plug Tesla.Middleware.BaseUrl, "https://api.weixin.qq.com"
-  end
 
   @retry_options Keyword.get(@opts, :retry_options,
                    delay: 500,
@@ -28,7 +16,36 @@ defmodule WeChat.Requester.OfficialAccount do
                    max_delay: 2_000,
                    should_retry: &WeChat.Utils.request_should_retry/1
                  )
-  plug Tesla.Middleware.Retry, @retry_options
-  plug Tesla.Middleware.JSON, decode_content_types: ["text/plain"]
-  plug Tesla.Middleware.Logger
+
+  defp middleware do
+    [
+      {Tesla.Middleware.Retry, @retry_options},
+      {Tesla.Middleware.JSON, decode_content_types: ["text/plain"]},
+      Tesla.Middleware.Logger
+    ]
+  end
+
+  if Mix.env() == :test do
+    defp client do
+      Tesla.client(middleware(), Tesla.Mock)
+    end
+  else
+    @adapter_options @opts
+                     |> Keyword.get(:adapter_options, pool_timeout: 5_000, receive_timeout: 5_000)
+                     |> Keyword.put(:name, WeChat.Finch)
+    defp client do
+      Tesla.client(
+        [{Tesla.Middleware.BaseUrl, "https://api.weixin.qq.com"} | middleware()],
+        {Tesla.Adapter.Finch, @adapter_options}
+      )
+    end
+  end
+
+  def get(url, opts \\ []) do
+    Tesla.get(client(), url, opts)
+  end
+
+  def post(url, body, opts \\ []) do
+    Tesla.post(client(), url, body, opts)
+  end
 end

@@ -19,8 +19,8 @@ defmodule WeChatTest do
 
     assert OfficialAccount.aes_key() == aes_key
     assert OfficialAccount.token() == "spamtest"
-    assert true = Enum.all?(1..3, &function_exported?(OfficialAccount, :get, &1))
-    assert true = Enum.all?(2..4, &function_exported?(OfficialAccount, :post, &1))
+    assert true = Enum.all?(1..2, &function_exported?(OfficialAccount, :get, &1))
+    assert true = Enum.all?(2..3, &function_exported?(OfficialAccount, :post, &1))
   end
 
   test "Auto generate functions(Work) - include Contacts" do
@@ -35,8 +35,8 @@ defmodule WeChatTest do
     assert WorkAgent.fetch_agent_cache_id!(Work, 10000) == "corp_id_10000"
     assert WorkAgent.fetch_agent_cache_id!(Work, :agent_name) == "corp_id_10000"
 
-    assert true = Enum.all?(1..3, &function_exported?(Work, :get, &1))
-    assert true = Enum.all?(2..4, &function_exported?(Work, :post, &1))
+    assert true = Enum.all?(1..2, &function_exported?(Work, :get, &1))
+    assert true = Enum.all?(2..3, &function_exported?(Work, :post, &1))
   end
 
   test "Auto generate functions(Pay)" do

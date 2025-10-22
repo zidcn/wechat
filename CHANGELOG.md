@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.19.0 (2025-10-22)
+- remove `client.get/3` & `client.post/4`
+- fix tesla builder warning
+- update deps
+
 ## v0.18.1 (2025-05-17)
 - fix SubscribeMessage module warning: clause will never match
 - update deps
