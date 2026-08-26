@@ -1,8 +1,16 @@
 # Changelog
 
-## Unreleased
-- 移除子模块生成功能: 删除 `gen_sub_module?` 选项以及 `Client.SubModule` 子模块调用方式, 请使用原生调用方式 `WeChat.Material.batch_get_material(Client, ...)`
+## v0.20.0 (2026-08-26)
 - 新增 微信支付公钥 支持: `use WeChat.Pay` 可配置 `platform_public_id` / `platform_public_key`, 配置后代替平台证书, 用于验签与敏感信息加解密, 并跳过平台证书的下载与存储
+  - `client.public_key/0` 始终返回商户公钥(由商户私钥推导); 配置平台公钥后, `encrypt_secret_data/1` 使用平台公钥加密
+  - `WeChat.Requester.Pay` 的 `get/3` / `post/4` 新增 `:serial_no` 选项, 用于设置 `wechatpay-serial` 请求头
+- 移除子模块生成功能: 删除 `gen_sub_module?` 选项以及 `Client.SubModule` 子模块调用方式, 请使用原生调用方式 `WeChat.Material.batch_get_material(Client, ...)`
+- 删除 `WeChat.POI` 模块(微信门店接口)
+- 删除 `WeChat.Account.short_url/2`(长链接转短链接接口)
+- 删除 `WeChat.MiniProgram.Store.get_card/2`(门店小程序卡券)
+- 新增 `WeChat.ServerMessage.ReplyMessage.transfer_ai_msg/3` 转接AI回复
+- 更新微信官方文档链接
+- 更新依赖(tesla / finch / plug / ex_doc 等)
 
 ## v0.19.0 (2025-10-22)
 - remove `client.get/3` & `client.post/4`

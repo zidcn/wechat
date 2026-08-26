@@ -9,6 +9,8 @@ defmodule WeChat.Pay.PlatformPublicKeyTest do
 
   @key_file "test/support/cert/apiclient_key.pem"
   @cert_file "test/support/cert/apiclient_cert.pem"
+  @platform_public_key_file "test/support/cert/platform_public_key.pem"
+  @platform_private_key_file "test/support/cert/platform_private_key.pem"
   @public_id "PUB_KEY_ID_TEST_00000000000000000000000000000000"
 
   defp base_options do
@@ -21,9 +23,20 @@ defmodule WeChat.Pay.PlatformPublicKeyTest do
     ]
   end
 
-  defp public_key_pem do
-    private_key = @key_file |> File.read!() |> X509.PrivateKey.from_pem!()
-    private_key |> X509.PublicKey.derive() |> X509.PublicKey.to_pem()
+  defp platform_public_key_pem, do: File.read!(@platform_public_key_file)
+
+  defp platform_private_key do
+    @platform_private_key_file |> File.read!() |> X509.PrivateKey.from_pem!()
+  end
+
+  defp merchant_private_key do
+    @key_file |> File.read!() |> X509.PrivateKey.from_pem!()
+  end
+
+  defp decrypt(cipher, private_key) do
+    Crypto.decrypt_secret_data(cipher, private_key)
+  rescue
+    _ -> :decrypt_failed
   end
 
   defp build_client(module, options) do
@@ -37,40 +50,49 @@ defmodule WeChat.Pay.PlatformPublicKeyTest do
     assert client.platform_public_id() == nil
     assert client.platform_public_key() == nil
 
-    private_key = @key_file |> File.read!() |> X509.PrivateKey.from_pem!()
-    assert client.public_key() == X509.PublicKey.derive(private_key)
+    assert client.public_key() == X509.PublicKey.derive(merchant_private_key())
   end
 
-  test "configured platform public key: public_key returns it and id/key funcs" do
+  test "configured platform public key: public_key stays merchant key" do
     client =
       build_client(WeChat.Test.PubKeyClient,
         platform_public_id: @public_id,
-        platform_public_key: {:binary, public_key_pem()}
+        platform_public_key: {:binary, platform_public_key_pem()}
       )
 
     assert client.platform_public_id() == @public_id
     assert is_tuple(client.platform_public_key())
-    # public_key 应指向微信支付公钥
-    assert client.public_key() == client.platform_public_key()
+
+    # public_key 始终是商户公钥, 与是否配置平台公钥无关
+    assert client.public_key() == X509.PublicKey.derive(merchant_private_key())
+    refute client.public_key() == client.platform_public_key()
+
+    # platform_public_key 是独立的平台公钥
+    assert client.platform_public_key() ==
+             @platform_public_key_file |> File.read!() |> X509.PublicKey.from_pem!()
   end
 
   test "encrypt_secret_data uses the platform public key" do
     client =
       build_client(WeChat.Test.PubKeyEncrypt,
         platform_public_id: @public_id,
-        platform_public_key: {:binary, public_key_pem()}
+        platform_public_key: {:binary, platform_public_key_pem()}
       )
 
     plain = "sensitive-name-张三"
     cipher = client.encrypt_secret_data(plain)
-    assert Crypto.decrypt_secret_data(cipher, client.private_key()) == plain
+
+    # 平台公钥加密 => 只有平台私钥能解开
+    assert decrypt(cipher, platform_private_key()) == plain
+    # 商户私钥解不开 => 确认没有误用商户公钥加密
+    assert decrypt(cipher, client.private_key()) == :decrypt_failed
   end
 
   test "Certificates.put_platform_public_key stores the public key for 验签" do
     client =
       build_client(WeChat.Test.PubKeyCerts,
         platform_public_id: @public_id,
-        platform_public_key: {:binary, public_key_pem()}
+        platform_public_key: {:binary, platform_public_key_pem()}
       )
 
     :ok = Certificates.put_platform_public_key(client)
@@ -96,12 +118,11 @@ defmodule WeChat.Pay.PlatformPublicKeyTest do
       Pay.build_client(
         WeChat.Test.PubKeyErr1,
         [
-          platform_public_key: {:binary, public_key_pem()}
+          platform_public_key: {:binary, platform_public_key_pem()}
         ] ++ base_options()
       )
     end
 
-    # keyword order: base_options contains mch_id etc, platform_public_key without id
     assert_raise ArgumentError, ~r/platform_public_key/, fn ->
       Pay.build_client(
         WeChat.Test.PubKeyErr2,
@@ -116,7 +137,7 @@ defmodule WeChat.Pay.PlatformPublicKeyTest do
         WeChat.Test.PubKeyErr3,
         [
           platform_public_id: :not_binary,
-          platform_public_key: {:binary, public_key_pem()}
+          platform_public_key: {:binary, platform_public_key_pem()}
         ] ++ base_options()
       )
     end

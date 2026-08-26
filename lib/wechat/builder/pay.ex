@@ -25,6 +25,23 @@ defmodule WeChat.Builder.Pay do
     requester = Map.get(options, :requester, WeChat.Requester.Pay)
     storage = Map.get(options, :storage, WeChat.Storage.PayFile)
 
+    encrypt_secret_data_fun =
+      if options.platform_public_key do
+        quote do
+          @doc "加密敏感信息"
+          def encrypt_secret_data(data) do
+            WeChat.Pay.Crypto.encrypt_secret_data(data, unquote(options.platform_public_key))
+          end
+        end
+      else
+        quote do
+          @doc "加密敏感信息"
+          def encrypt_secret_data(data) do
+            WeChat.Pay.Crypto.encrypt_secret_data(data, unquote(options.public_key))
+          end
+        end
+      end
+
     quote do
       use Supervisor
 
@@ -72,10 +89,7 @@ defmodule WeChat.Builder.Pay do
       @doc "微信支付公钥"
       def platform_public_key, do: unquote(options.platform_public_key)
 
-      @doc "加密敏感信息"
-      def encrypt_secret_data(data) do
-        WeChat.Pay.Crypto.encrypt_secret_data(data, unquote(options.public_key))
-      end
+      unquote(encrypt_secret_data_fun)
 
       @doc "解密敏感信息"
       def decrypt_secret_data(cipher_text) do
@@ -134,7 +148,7 @@ defmodule WeChat.Builder.Pay do
             "Please set platform_public_id option when platform_public_key is set for #{inspect(client)}"
     end
 
-    public_key = platform_public_key || X509.PublicKey.derive(private_key)
+    public_key = X509.PublicKey.derive(private_key)
 
     %{options | api_secret_key: api_secret_key, api_secret_v2_key: api_secret_v2_key}
     |> Map.put(:private_key, Macro.escape(private_key))
