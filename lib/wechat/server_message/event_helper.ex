@@ -104,8 +104,7 @@ if Code.ensure_loaded?(Plug) do
         # 安全模式
         %{"Encrypt" => encrypt_content} -> decrypt_json_msg(encrypt_content, params, client)
         # 明文模式
-        json when is_map(json) -> {:ok, :plaqin_text, json}
-        _error -> {:error, "invalid"}
+        json -> {:ok, :plaqin_text, json}
       end
     end
 

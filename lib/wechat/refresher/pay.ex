@@ -18,15 +18,30 @@ defmodule WeChat.Refresher.Pay do
 
   @impl true
   def init(settings = %{client: client}) do
-    make_sure_certs(client)
-    settings = Map.merge(%{update_interval: 43200, retry_interval: 60}, settings)
+    state =
+      if is_nil(client.platform_public_key()) do
+        make_sure_certs(client)
+        settings = Map.merge(%{update_interval: 43200, retry_interval: 60}, settings)
 
-    time_settings =
-      Map.take(settings, [:update_interval, :retry_interval])
-      |> Map.new(fn {k, v} -> {k, v * 1000} end)
+        time_settings =
+          Map.take(settings, [:update_interval, :retry_interval])
+          |> Map.new(fn {k, v} -> {k, v * 1000} end)
 
-    timer = start_update_timer(time_settings.update_interval, client)
-    state = Map.merge(%{client: client, settings: settings, timer: timer}, time_settings)
+        timer = start_update_timer(time_settings.update_interval, client)
+        Map.merge(%{client: client, settings: settings, timer: timer}, time_settings)
+      else
+        # 直接使用微信支付公钥
+        Certificates.put_platform_public_key(client)
+
+        %{
+          client: client,
+          settings: settings,
+          timer: nil,
+          update_interval: nil,
+          retry_interval: nil
+        }
+      end
+
     {:ok, state}
   end
 

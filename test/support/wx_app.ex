@@ -22,8 +22,7 @@ defmodule WeChat.Test.Component do
     appid: "wx2c2769f8efd9abc2",
     by_component?: true,
     component_appid: "wx3c2769f8efd9abc3",
-    component_appsecret: "component_appsecret",
-    gen_sub_module?: true
+    component_appsecret: "component_appsecret"
 end
 
 defmodule WeChat.Test.DynamicSecretB do
@@ -32,16 +31,14 @@ defmodule WeChat.Test.DynamicSecretB do
     appid: "wx2c2769f8efd9abc2",
     by_component?: true,
     component_appid: "wx3c2769f8efd9abc3",
-    component_appsecret: :runtime_env,
-    gen_sub_module?: true
+    component_appsecret: :runtime_env
 end
 
 defmodule WeChat.Test.Mini do
   @moduledoc "小程序"
   use WeChat,
     appid: "wx2c2769f8efd9abc2",
-    app_type: :mini_program,
-    gen_sub_module?: true
+    app_type: :mini_program
 end
 
 defmodule WeChat.Test.MiniComponent do
@@ -51,8 +48,7 @@ defmodule WeChat.Test.MiniComponent do
     app_type: :mini_program,
     by_component?: true,
     component_appid: "wx3c2769f8efd9abc3",
-    component_appsecret: "component_appsecret",
-    gen_sub_module?: true
+    component_appsecret: "component_appsecret"
 end
 
 defmodule WeChat.Test.Work do

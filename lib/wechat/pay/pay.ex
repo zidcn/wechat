@@ -26,6 +26,25 @@ defmodule WeChat.Pay do
 
   定义参数说明请看 `t:options/0`
 
+  ## 使用微信支付公钥
+
+  除了从 `/v3/certificates` 接口下载平台证书外，还可以配置微信支付公钥(微信支付公钥ID + 微信支付公钥)来验签/加密敏感信息。
+  配置了平台公钥后，将跳过平台证书的下载和存储:
+
+      defmodule YourApp.WeChatAppCodeName do
+        @moduledoc "CodeName"
+        use WeChat.Pay,
+          mch_id: "1900000109",
+          api_secret_v2_key: "api_secret_v2_key",
+          api_secret_key: "api_secret_v3_key",
+          client_serial_no: "client_serial_no",
+          client_key: {:file, "apiclient_key.pem"},
+          platform_public_id: "PUB_KEY_ID_xxxxxxxx",
+          platform_public_key: {:file, "pub_key.pem"}
+      end
+
+  [官方文档](https://pay.weixin.qq.com/doc/v3/merchant/4012154180.md){:target="_blank"}
+
   ## V2 SSL 配置
 
   部分 v2 的接口请求时需要用到证书，如：撤销订单，因此如果有使用到这部分接口，必须添加下面的配置
@@ -76,6 +95,16 @@ defmodule WeChat.Pay do
   @typedoc "证书的序列号"
   @type serial_no :: binary
   @typedoc """
+  微信支付公钥ID -
+  [官方文档](https://pay.weixin.qq.com/doc/v3/merchant/4012153196.md){:target="_blank"}
+  """
+  @type platform_public_id :: serial_no
+  @typedoc """
+  微信支付公钥 -
+  [官方文档](https://pay.weixin.qq.com/doc/v3/merchant/4012153196.md){:target="_blank"}
+  """
+  @type platform_public_key :: pem_file
+  @typedoc """
   平台证书列表 -
   [官方文档](https://pay.weixin.qq.com/docs/merchant/development/interface-rules/wechatpay-certificates.html){:target="_blank"}
   """
@@ -104,6 +133,8 @@ defmodule WeChat.Pay do
   - `api_secret_key`: API v3密钥, 必填
   - `client_serial_no`: 客户端证书序列号, 必填
   - `client_key`: 客户端私钥, 必填
+  - `platform_public_id`: 微信支付公钥ID, 可选(配置了平台公钥时代替平台证书)
+  - `platform_public_key`: 微信支付公钥, 可选
   - `storage`: 存储器，默认值: `WeChat.Storage.PayFile`
   - `requester`: 请求客户端, 默认值: `WeChat.Requester.Pay`
   """
@@ -113,6 +144,8 @@ defmodule WeChat.Pay do
           api_secret_key: api_secret_key,
           client_serial_no: client_serial_no,
           client_key: client_key,
+          platform_public_id: platform_public_id,
+          platform_public_key: platform_public_key,
           requester: module,
           storage: module
         ]

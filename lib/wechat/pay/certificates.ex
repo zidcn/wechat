@@ -12,6 +12,9 @@ defmodule WeChat.Pay.Certificates do
   alias WeChat.Pay
   alias WeChat.Pay.Crypto
 
+  @typedoc "平台公钥"
+  @type public_key :: X509.PublicKey.t()
+
   @doc """
   下载平台证书 -
   [官方文档](https://pay.weixin.qq.com/docs/merchant/apis/platform-certificate/api-v3-get-certificates/get.html){:target="_blank"}
@@ -86,12 +89,30 @@ defmodule WeChat.Pay.Certificates do
     :persistent_term.get({:wechat, {client, :certs}})
   end
 
+  @doc "将微信支付公钥存入缓存(用于验签/加密)"
+  @spec put_platform_public_key(Pay.client()) :: :ok
+  def put_platform_public_key(client) do
+    put_cert(client, client.platform_public_id(), client.platform_public_key())
+  end
+
   @doc "保存平台证书 serial_no => cert 的对应关系"
-  @spec put_cert(Pay.client(), Pay.platform_serial_no(), cert :: binary()) :: :ok
+  @spec put_cert(Pay.client(), Pay.platform_serial_no(), cert :: binary() | public_key) :: :ok
   def put_cert(client, serial_no, cert) do
-    public_key = cert |> X509.Certificate.from_pem!() |> X509.Certificate.public_key()
+    public_key = load_public_key!(cert)
     :persistent_term.put({:wechat, {client, serial_no}}, public_key)
   end
+
+  @doc false
+  @spec load_public_key!(cert :: binary() | public_key) :: X509.PublicKey.t()
+  def load_public_key!(pem) when is_binary(pem) do
+    if String.contains?(pem, "BEGIN CERTIFICATE") do
+      pem |> X509.Certificate.from_pem!() |> X509.Certificate.public_key()
+    else
+      X509.PublicKey.from_pem!(pem)
+    end
+  end
+
+  def load_public_key!(key) when is_tuple(key), do: key
 
   @doc "获取 serial_no 对应的 平台证书"
   @spec get_cert(Pay.client(), Pay.platform_serial_no()) :: X509.PublicKey.t()

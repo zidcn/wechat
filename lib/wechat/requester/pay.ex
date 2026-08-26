@@ -22,12 +22,14 @@ defmodule WeChat.Requester.Pay do
 
   @spec get(Pay.client(), url :: binary, opts :: keyword) :: WeChat.response()
   def get(client, url, opts \\ []) do
-    client |> http_client() |> Tesla.get(url, opts)
+    {serial_no, opts} = Keyword.pop(opts, :serial_no)
+    client |> http_client(serial_no) |> Tesla.get(url, opts)
   end
 
   @spec post(Pay.client(), url :: binary, body :: any, opts :: keyword) :: WeChat.response()
   def post(client, url, body, opts \\ []) do
-    client |> http_client() |> Tesla.post(url, body, opts)
+    {serial_no, opts} = Keyword.pop(opts, :serial_no)
+    client |> http_client(serial_no) |> Tesla.post(url, body, opts)
   end
 
   @spec v2_post(Pay.client(), url :: binary, body :: any, opts :: keyword) :: WeChat.response()
@@ -38,13 +40,21 @@ defmodule WeChat.Requester.Pay do
 
   # v3
   @doc false
-  def http_client(client) do
+  def http_client(client, serial_no \\ nil) do
     name = Pay.finch_name(client)
+    base_headers = [{"accept", "application/json"}, {"user-agent", @user_agent}]
+
+    headers =
+      if serial_no do
+        [{"wechatpay-serial", serial_no} | base_headers]
+      else
+        base_headers
+      end
 
     Tesla.client(
       [
         {Middleware.BaseUrl, @base_url},
-        {Middleware.Headers, [{"accept", "application/json"}, {"user-agent", @user_agent}]},
+        {Middleware.Headers, headers},
         Middleware.EncodeJson,
         {Pay.Middleware.Authorization, client},
         {Pay.Middleware.VerifySignature, client},
@@ -105,12 +115,12 @@ defmodule WeChat.Requester.Pay do
     query = URI.decode_query(query) |> Map.to_list()
 
     token =
-      Pay.Middleware.Authorization.gen_token(
-        client.mch_id(),
-        client.client_serial_no(),
-        client.private_key(),
-        %{url: path, query: query, method: "GET", body: ""}
-      )
+      Pay.Middleware.Authorization.gen_token(client, %{
+        url: path,
+        query: query,
+        method: "GET",
+        body: ""
+      })
 
     Tesla.client(
       [

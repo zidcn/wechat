@@ -12,11 +12,15 @@ defmodule WeChat.Pay.Middleware.Authorization do
 
   @impl Tesla.Middleware
   def call(env, next, client) do
-    token = gen_token(client.mch_id(), client.client_serial_no(), client.private_key(), env)
-
     env
-    |> Tesla.put_headers([{"authorization", "WECHATPAY2-SHA256-RSA2048 #{token}"}])
+    |> Tesla.put_headers([
+      {"authorization", "WECHATPAY2-SHA256-RSA2048 #{gen_token(client, env)}"}
+    ])
     |> Tesla.run(next)
+  end
+
+  def gen_token(client, env) do
+    gen_token(client.mch_id(), client.client_serial_no(), client.private_key(), env)
   end
 
   def gen_token(mch_id, serial_no, private_key, env) do

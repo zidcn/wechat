@@ -5,7 +5,7 @@ defmodule WeChat.Pay.Crypto do
   def decrypt_aes_256_gcm(api_secret_key, ciphertext, associated_data, iv) do
     data = Base.decode64!(ciphertext, padding: false)
     len = byte_size(data) - 16
-    <<data::binary-size(len), tag::binary-size(16)>> = data
+    <<data::binary-size(^len), tag::binary-size(16)>> = data
 
     :crypto.crypto_one_time_aead(
       :aes_256_gcm,
@@ -16,16 +16,6 @@ defmodule WeChat.Pay.Crypto do
       tag,
       false
     )
-  end
-
-  @doc false
-  def load_pem!({:app_dir, app, path}), do: load_pem!({:file, Application.app_dir(app, path)})
-  def load_pem!({:file, path}), do: path |> File.read!() |> decode_key()
-  def load_pem!({:binary, binary}), do: decode_key(binary)
-
-  @doc false
-  def decode_key(binary) do
-    binary |> :public_key.pem_decode() |> hd() |> :public_key.pem_entry_decode()
   end
 
   @doc """

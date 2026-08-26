@@ -77,8 +77,6 @@ WeChat.add_to_refresher(YourApp.WeChatAppCodeName)
 
 更多详情请见：[WeChat模块](https://hexdocs.pm/wechat_sdk/WeChat.html)
 
-**从 `0.17` 开始不再推荐 `Client.Material.batch_get_material/2` 子模块的调用方式**
-
 ## 网页授权
 
 [官方文档](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html)

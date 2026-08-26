@@ -55,14 +55,11 @@ defmodule WeChatTest do
       appid: "wx2c2769f8efd9abc2",
       appsecret: "appsecret",
       encoding_aes_key: "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG",
-      token: "spamtest",
-      gen_sub_module?: true
+      token: "spamtest"
     ]
 
     assert {:ok, WxApp3} = WeChat.build_client(WxApp3, opts)
     assert apply(WxApp3, :appid, []) == "wx2c2769f8efd9abc2"
-    assert function_exported?(WxApp3.WebPage, :code2access_token, 1)
-    assert false == function_exported?(WxApp3.MiniProgram.Auth, :code2session, 1)
   end
 
   test "build component client" do
@@ -72,15 +69,11 @@ defmodule WeChatTest do
       component_appid: "wx3c2769f8efd9abc3",
       appsecret: "appsecret",
       encoding_aes_key: "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG",
-      token: "spamtest",
-      gen_sub_module?: true
+      token: "spamtest"
     ]
 
     assert {:ok, WxApp4} = WeChat.build_client(WxApp4, opts)
     assert apply(WxApp4, :appid, []) == "wx2c2769f8efd9abc2"
-    assert function_exported?(WxApp4.Component, :get_authorizer_info, 0)
-    assert function_exported?(WxApp4.WebPage, :code2access_token, 1)
-    assert false == function_exported?(WxApp4.MiniProgram.Auth, :code2session, 1)
   end
 
   test "build mini_program client" do
@@ -89,14 +82,11 @@ defmodule WeChatTest do
       appid: "wx2c2769f8efd9abc2",
       appsecret: "appsecret",
       encoding_aes_key: "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG",
-      token: "spamtest",
-      gen_sub_module?: true
+      token: "spamtest"
     ]
 
     assert {:ok, WxApp5} = WeChat.build_client(WxApp5, opts)
     assert apply(WxApp5, :appid, []) == "wx2c2769f8efd9abc2"
-    assert false == function_exported?(WxApp5.WebPage, :code2access_token, 1)
-    assert function_exported?(WxApp5.MiniProgram.Auth, :code2session, 1)
   end
 
   test "dynamic_secret" do

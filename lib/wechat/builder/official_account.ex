@@ -1,6 +1,6 @@
 defmodule WeChat.Builder.OfficialAccount do
   @moduledoc false
-  alias WeChat.{Component, MiniProgram, Builder.Utils}
+  alias WeChat.Builder.Utils
 
   @base_option_fields [
     :appid,
@@ -14,7 +14,6 @@ defmodule WeChat.Builder.OfficialAccount do
     :token
   ]
   @known_option_keys [
-    :gen_sub_module?,
     :component_appid,
     :component_appsecret,
     :appsecret | @base_option_fields
@@ -26,51 +25,6 @@ defmodule WeChat.Builder.OfficialAccount do
     by_component?: false,
     storage: WeChat.Storage.File,
     requester: WeChat.Requester.OfficialAccount
-  ]
-
-  @both_modules [
-    WeChat.CustomMessage,
-    WeChat.SubscribeMessage
-  ]
-
-  @official_account_modules [
-    WeChat.Menu,
-    WeChat.Material,
-    WeChat.DraftBox,
-    WeChat.Publish,
-    WeChat.Card,
-    WeChat.CardManaging,
-    WeChat.CardDistributing,
-    WeChat.EInvoice,
-    WeChat.InvoicingPlatform,
-    WeChat.MemberCard,
-    WeChat.CustomService,
-    WeChat.BatchSends,
-    WeChat.Template,
-    WeChat.User,
-    WeChat.UserTag,
-    WeChat.UserBlacklist,
-    WeChat.Account,
-    WeChat.Comment,
-    WeChat.WebPage,
-    WeChat.POI
-  ]
-
-  @mini_program_modules [
-    MiniProgram.Auth,
-    MiniProgram.Code,
-    MiniProgram.UrlScheme,
-    MiniProgram.NearbyPOI,
-    MiniProgram.Search,
-    MiniProgram.Store,
-    MiniProgram.OCR,
-    MiniProgram.Security,
-    MiniProgram.Live.Room,
-    MiniProgram.Live.Goods,
-    MiniProgram.Live.Role,
-    MiniProgram.Live.Subscribe,
-    MiniProgram.UserInfo,
-    MiniProgram.SubscribeMessage
   ]
 
   defmacro __using__(options \\ []) do
@@ -85,45 +39,25 @@ defmodule WeChat.Builder.OfficialAccount do
 
     app_type = Keyword.fetch!(default_opts, :app_type)
 
-    sub_modules =
-      Keyword.get_lazy(default_opts, :sub_modules, fn ->
-        case app_type do
-          :official_account ->
-            @official_account_modules ++ @both_modules
+    if app_type not in [:official_account, :mini_program] do
+      raise ArgumentError, "please set app_type in [:official_account, :mini_program]"
+    end
 
-          :mini_program ->
-            @mini_program_modules ++ @both_modules
-
-          _ ->
-            raise ArgumentError, "please set app_type in [:official_account, :mini_program]"
-        end
-      end)
-
-    {sub_modules, default_opts} =
+    default_opts =
       if Keyword.get(default_opts, :by_component?, false) do
         if !Keyword.has_key?(default_opts, :component_appid) do
           raise ArgumentError, "please set :component_appid when setting by_component?: true"
         end
 
-        {
-          [Component | sub_modules],
-          Keyword.take(default_opts, [
-            :component_appid,
-            :component_appsecret | @base_option_fields
-          ])
-        }
+        Keyword.take(default_opts, [
+          :component_appid,
+          :component_appsecret | @base_option_fields
+        ])
       else
-        {
-          sub_modules,
-          Keyword.take(default_opts, [:appsecret | @base_option_fields])
-        }
+        Keyword.take(default_opts, [:appsecret | @base_option_fields])
       end
 
-    if Keyword.get(opts, :gen_sub_module?, false) do
-      gen_get_functions(default_opts, client) ++ Utils.gen_sub_modules(sub_modules, client)
-    else
-      gen_get_functions(default_opts, client)
-    end
+    gen_get_functions(default_opts, client)
   end
 
   defp gen_get_functions(default_opts, client) do

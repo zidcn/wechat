@@ -1,6 +1,7 @@
 defmodule WeChat.Builder.Pay do
   @moduledoc false
   alias WeChat.Builder.Utils
+  @compile {:no_warn_undefined, X509.PrivateKey}
   @compile {:no_warn_undefined, X509.PublicKey}
   @known_option_keys [
     :mch_id,
@@ -8,6 +9,8 @@ defmodule WeChat.Builder.Pay do
     :api_secret_key,
     :client_serial_no,
     :client_key,
+    :platform_public_id,
+    :platform_public_key,
     :requester,
     :storage
   ]
@@ -64,6 +67,10 @@ defmodule WeChat.Builder.Pay do
       def public_key, do: unquote(options.public_key)
       @doc false
       def private_key, do: unquote(options.private_key)
+      @doc "微信支付公钥ID"
+      def platform_public_id, do: unquote(options.platform_public_id)
+      @doc "微信支付公钥"
+      def platform_public_key, do: unquote(options.platform_public_key)
 
       @doc "加密敏感信息"
       def encrypt_secret_data(data) do
@@ -104,14 +111,36 @@ defmodule WeChat.Builder.Pay do
           raise ArgumentError, "Please set client_key option for #{inspect(client)}"
 
         pem_file ->
-          WeChat.Pay.Crypto.load_pem!(pem_file)
+          pem_file |> read_pem!() |> X509.PrivateKey.from_pem!()
       end
 
-    public_key = X509.PublicKey.derive(private_key)
+    platform_public_id = Map.get(options, :platform_public_id)
+
+    platform_public_key =
+      check_platform_public_key(Map.get(options, :platform_public_key), client)
+
+    if not is_nil(platform_public_id) and not is_binary(platform_public_id) do
+      raise ArgumentError,
+            "Bad platform_public_id: #{inspect(platform_public_id)} option for #{inspect(client)}"
+    end
+
+    if is_binary(platform_public_id) and is_nil(platform_public_key) do
+      raise ArgumentError,
+            "Please set platform_public_key option when platform_public_id is set for #{inspect(client)}"
+    end
+
+    if is_nil(platform_public_id) and not is_nil(platform_public_key) do
+      raise ArgumentError,
+            "Please set platform_public_id option when platform_public_key is set for #{inspect(client)}"
+    end
+
+    public_key = platform_public_key || X509.PublicKey.derive(private_key)
 
     %{options | api_secret_key: api_secret_key, api_secret_v2_key: api_secret_v2_key}
     |> Map.put(:private_key, Macro.escape(private_key))
     |> Map.put(:public_key, Macro.escape(public_key))
+    |> Map.put(:platform_public_id, Macro.escape(platform_public_id))
+    |> Map.put(:platform_public_key, Macro.escape(platform_public_key))
   end
 
   defp check_api_key(nil, fun_name, client) do
@@ -136,6 +165,38 @@ defmodule WeChat.Builder.Pay do
     raise ArgumentError,
           "Bad #{fun_name}: #{inspect(api_key)} option for #{inspect(client)}"
   end
+
+  defp check_platform_public_key(nil, _client), do: nil
+
+  defp check_platform_public_key(pem_file, client) when is_binary(pem_file) do
+    parse_platform_public_key(pem_file, client)
+  end
+
+  defp check_platform_public_key(pem_file, client) do
+    case check_pem_file(pem_file) do
+      {:bad_arg, bad} ->
+        raise ArgumentError,
+              "Bad platform_public_key: #{inspect(bad)} option for #{inspect(client)}"
+
+      pem_file ->
+        pem_file |> read_pem!() |> parse_platform_public_key(client)
+    end
+  end
+
+  defp parse_platform_public_key(pem, client) do
+    case X509.PublicKey.from_pem(pem) do
+      {:ok, public_key} ->
+        public_key
+
+      {:error, reason} ->
+        raise ArgumentError,
+              "Bad platform_public_key: #{inspect(reason)} option for #{inspect(client)}"
+    end
+  end
+
+  defp read_pem!({:binary, binary}), do: binary
+  defp read_pem!({:file, path}), do: File.read!(path)
+  defp read_pem!({:app_dir, app, path}), do: Application.app_dir(app, path) |> File.read!()
 
   defp check_pem_file(quoted = {:{}, opts, list}) when is_list(opts) and is_list(list) do
     {pem_file, _} = Code.eval_quoted(quoted)

@@ -40,15 +40,7 @@ defmodule WeChat do
 
   ## 接口调用
 
-  支持两种方式调用:
-
-  - 调用 `client` 方法:
-
-    `YourApp.WeChatAppCodeName.Material.batch_get_material(:image, 2)`
-
-  - 原生调用方法
-
-    `WeChat.Material.batch_get_material(YourApp.WeChatAppCodeName, :image, 2)`
+  `WeChat.Material.batch_get_material(YourApp.WeChatAppCodeName, :image, 2)`
 
   ## 企业微信
 
@@ -135,8 +127,6 @@ defmodule WeChat do
   - `encoding_aes_key`: 在编译时会自动将 `encoding_aes_key` 转换为 `aes_key`
   - `token`: Token
   - `requester`: 请求客户端, 默认值: `WeChat.Requester`
-  - `gen_sub_module?`: 是否生成子模块，默认值: false
-  - `sub_modules`: 指定生成子模块的列表
   """
   @type options :: [
           server_role: server_role | env_option,
