@@ -5,7 +5,7 @@ defmodule WeChat.MiniProgram.Live.Role do
   import Jason.Helpers
   alias WeChat.User
 
-  @doc_link "https://developers.weixin.qq.com/miniprogram/dev/framework/liveplayer/role-manage.html"
+  @doc_link "https://developers.weixin.qq.com/miniprogram/dev/platform-capabilities/industry/liveplayer/role-manage.html"
 
   @typedoc "成员角色 [1-管理员，2-主播，3-运营者]，设置超级管理员将无效"
   @type role :: 1..3

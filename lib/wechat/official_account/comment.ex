@@ -1,12 +1,12 @@
 defmodule WeChat.Comment do
   @moduledoc """
-  图文消息留言管理
+  能力接入/留言管理
 
-  [官方文档](https://developers.weixin.qq.com/doc/offiaccount/Comments_management/Image_Comments_Management_Interface.html){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/doc/service/guide/product/comments.html){:target="_blank"}
   """
   import Jason.Helpers
 
-  @doc_link "https://developers.weixin.qq.com/doc/offiaccount/Comments_management/Image_Comments_Management_Interface.html"
+  @doc_link "https://developers.weixin.qq.com/doc/service/api/leaving"
 
   @type msg_data_id :: integer
   @type user_comment_id :: integer
@@ -21,7 +21,7 @@ defmodule WeChat.Comment do
 
   @doc """
   打开已群发文章评论 -
-  [官方文档](#{@doc_link}){:target="_blank"}
+  [官方文档](#{@doc_link}/api_openarticlecomment.html){:target="_blank"}
   """
   @spec open(WeChat.client(), msg_data_id, index :: integer) :: WeChat.response()
   def open(client, msg_data_id, index \\ 0) do
@@ -34,7 +34,7 @@ defmodule WeChat.Comment do
 
   @doc """
   关闭已群发文章评论 -
-  [官方文档](#{@doc_link}){:target="_blank"}
+  [官方文档](#{@doc_link}/api_closecomment.html){:target="_blank"}
   """
   @spec close(WeChat.client(), msg_data_id, index :: integer) :: WeChat.response()
   def close(client, msg_data_id, index \\ 0) do
@@ -47,7 +47,7 @@ defmodule WeChat.Comment do
 
   @doc """
   查看指定文章的评论数据 -
-  [官方文档](#{@doc_link}){:target="_blank"}
+  [官方文档](#{@doc_link}/api_listcomment.html){:target="_blank"}
     
   ## 参数说明
   | 参数 | 是否必须 | 类型 | 说明 |
@@ -83,7 +83,7 @@ defmodule WeChat.Comment do
 
   @doc """
   将评论标记精选 -
-  [官方文档](#{@doc_link}){:target="_blank"}
+  [官方文档](#{@doc_link}/api_electcomment.html){:target="_blank"}
   """
   @spec mark_elect(WeChat.client(), msg_data_id, user_comment_id, index :: integer) ::
           WeChat.response()
@@ -101,7 +101,7 @@ defmodule WeChat.Comment do
 
   @doc """
   将评论取消精选 -
-  [官方文档](#{@doc_link}){:target="_blank"}
+  [官方文档](#{@doc_link}/api_unelectcomment.html){:target="_blank"}
   """
   @spec unmark_elect(WeChat.client(), msg_data_id, user_comment_id, index :: integer) ::
           WeChat.response()
@@ -119,7 +119,7 @@ defmodule WeChat.Comment do
 
   @doc """
   删除评论 -
-  [官方文档](#{@doc_link}){:target="_blank"}
+  [官方文档](#{@doc_link}/api_delcomment.html){:target="_blank"}
   """
   @spec delete(WeChat.client(), msg_data_id, user_comment_id, index :: integer) ::
           WeChat.response()
@@ -137,7 +137,7 @@ defmodule WeChat.Comment do
 
   @doc """
   回复评论 -
-  [官方文档](#{@doc_link}){:target="_blank"}
+  [官方文档](#{@doc_link}/api_replycomment.html){:target="_blank"}
   """
   @spec add_reply(WeChat.client(), msg_data_id, user_comment_id, content, index :: integer) ::
           WeChat.response()
@@ -156,7 +156,7 @@ defmodule WeChat.Comment do
 
   @doc """
   删除回复 -
-  [官方文档](#{@doc_link}){:target="_blank"}
+  [官方文档](#{@doc_link}/api_delreplycomment.html){:target="_blank"}
   """
   @spec delete_reply(WeChat.client(), msg_data_id, user_comment_id, index :: integer) ::
           WeChat.response()

@@ -47,9 +47,11 @@ defmodule WeChat.MiniProgram.Code do
           :is_hyaline => is_hyaline
         }
 
+  @doc_link "https://developers.weixin.qq.com/miniprogram/dev/server/API/qrcode-link/qr-code"
+
   @doc """
   生成的小程序二维码 -
-  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/qrcode-link/qr-code/createQRCode.html){:target="_blank"}
+  [官方文档](#{@doc_link}/api_createqrcode.html){:target="_blank"}
 
   获取小程序二维码，适用于需要的码数量较少的业务场景。通过该接口生成的小程序二维码，永久有效，有数量限制，
   详见[获取二维码](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/qr-code.html){:target="_blank"}。
@@ -64,8 +66,8 @@ defmodule WeChat.MiniProgram.Code do
   end
 
   @doc """
-  生成的小程序码 -
-  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/qrcode-link/qr-code/getQRCode.html){:target="_blank"}
+  获取小程序码 -
+  [官方文档](#{@doc_link}/api_getqrcode.html){:target="_blank"}
 
   获取小程序码，适用于需要的码数量较少的业务场景。通过该接口生成的小程序码，永久有效，有数量限制，
   详见[获取二维码](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/qr-code.html){:target="_blank"}。
@@ -80,10 +82,10 @@ defmodule WeChat.MiniProgram.Code do
   end
 
   @doc """
-  生成的小程序码 -
-  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/qrcode-link/qr-code/getQRCode.html){:target="_blank"}
+  获取不限制的小程序码 -
+  [官方文档](#{@doc_link}/api_getunlimitedqrcode.html){:target="_blank"}
 
-  获取小程序码，适用于需要的码数量极多的业务场景。通过该接口生成的小程序码，永久有效，数量暂无限制，
+  获取不限制的小程序码，适用于需要的码数量极多的业务场景。通过该接口生成的小程序码，永久有效，数量暂无限制，
   详见[获取二维码](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/qr-code.html){:target="_blank"}。
   """
   @spec create_code_unlimited(WeChat.client(), scene, code_options) :: WeChat.response()

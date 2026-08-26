@@ -1,6 +1,8 @@
 defmodule WeChat.MiniProgram.NearbyPOI do
   @moduledoc """
   附件的小程序
+
+  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/nearby-poi/){:target="_blank"}
   """
 
   import Jason.Helpers
@@ -9,7 +11,7 @@ defmodule WeChat.MiniProgram.NearbyPOI do
   门店图片
 
   最多9张，最少1张，上传门店图片如门店外景、环境设施、商品服务等，图片将展示在微信客户端的门店页。
-  图片链接通过[文档](https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1444738729)中的《上传图文消息内的图片获取URL》接口获取。
+  图片链接通过[文档](https://developers.weixin.qq.com/doc/service/guide/product/asset.html)中的《上传图文消息内的图片获取URL》接口获取。
   文件格式为bmp、png、jpeg、jpg或gif，大小不超过5M `pic_list` 是字符串，内容是一个json
   """
   @type pic_list :: String.t()
@@ -123,7 +125,7 @@ defmodule WeChat.MiniProgram.NearbyPOI do
 
   @doc """
   添加地点 -
-  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/nearby-poi/addNearbyPoi.html){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/nearby-poi/api_addnearbypoi.html){:target="_blank"}
   """
   @spec add(WeChat.client(), add_options) :: WeChat.response()
   def add(client, options) do
@@ -136,7 +138,7 @@ defmodule WeChat.MiniProgram.NearbyPOI do
 
   @doc """
   删除地点 -
-  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/nearby-poi/deleteNearbyPoi.html){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/nearby-poi/api_deletenearbypoi.html){:target="_blank"}
   """
   @spec delete(WeChat.client(), poi_id) :: WeChat.response()
   def delete(client, poi_id) do
@@ -148,8 +150,8 @@ defmodule WeChat.MiniProgram.NearbyPOI do
   end
 
   @doc """
-  查看地点列表 -
-  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/nearby-poi/getNearbyPoiList.html){:target="_blank"}
+  查看地点 -
+  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/nearby-poi/api_getnearbypoilist.html){:target="_blank"}
   """
   @spec get_list(WeChat.client(), start :: non_neg_integer, limit :: 1..1000) :: WeChat.response()
   def get_list(client, start \\ 1, limit \\ 10) do
@@ -160,8 +162,8 @@ defmodule WeChat.MiniProgram.NearbyPOI do
   end
 
   @doc """
-  展示/取消展示附近小程序 -
-  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/nearby-poi/setShowStatus.html){:target="_blank"}
+  设置展示状态 -
+  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/nearby-poi/api_setshowstatus.html){:target="_blank"}
   """
   @spec set_show_status(WeChat.client(), poi_id, status) :: WeChat.response()
   def set_show_status(client, poi_id, status) do

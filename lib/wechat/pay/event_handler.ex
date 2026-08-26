@@ -3,7 +3,7 @@ if Code.ensure_loaded?(Plug) do
     @moduledoc """
     微信支付 回调通知处理器
 
-    [官方文档](https://pay.weixin.qq.com/docs/merchant/apis/jsapi-payment/payment-notice.html)
+    [官方文档](https://pay.weixin.qq.com/doc/v3/merchant/4012791861){:target="_blank"}
 
         注意
 

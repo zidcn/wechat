@@ -1,10 +1,10 @@
 defmodule WeChat.MiniProgram.Live.Goods do
   @moduledoc """
-  小程序 - 直播商品管理
+  小程序直播/商品管理接口
   """
   import Jason.Helpers
 
-  @doc_link "https://developers.weixin.qq.com/miniprogram/dev/framework/liveplayer/commodity-api.html"
+  @doc_link "https://developers.weixin.qq.com/miniprogram/dev/platform-capabilities/industry/liveplayer/commodity-api.html"
 
   @typedoc "审核单ID"
   @type audit_id :: integer

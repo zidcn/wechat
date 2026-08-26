@@ -2,11 +2,11 @@ defmodule WeChat.MiniProgram.Store do
   @moduledoc """
   小程序 - 门店接口
 
-  [官方文档](https://developers.weixin.qq.com/doc/offiaccount/WeChat_Stores/WeChat_Shop_Miniprogram_Interface.html){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/doc/service/guide/product/WeChat_Store.html){:target="_blank"}
   """
   import Jason.Helpers
 
-  @doc_link "https://developers.weixin.qq.com/doc/offiaccount/WeChat_Stores/WeChat_Shop_Miniprogram_Interface.html"
+  @doc_link "https://developers.weixin.qq.com/doc/service/api/stores/miniapp"
 
   @type poi_id :: String.t()
   @typedoc "对应 拉取省市区信息接口 中的id字段"
@@ -15,7 +15,7 @@ defmodule WeChat.MiniProgram.Store do
 
   @doc """
   申请门店 -
-  [官方文档](#{@doc_link}#_2-创建门店小程序){:target="_blank"}
+  [官方文档](#{@doc_link}/api_applywxastore.html){:target="_blank"}
 
   创建门店小程序提交后需要公众号管理员确认通过后才可进行审核。如果主管理员24小时超时未确认，才能再次提交。
   """
@@ -26,7 +26,7 @@ defmodule WeChat.MiniProgram.Store do
 
   @doc """
   查询门店小程序审核结果 -
-  [官方文档](#{@doc_link}#_3-查询门店小程序审核结果){:target="_blank"}
+  [官方文档](#{@doc_link}/api_getwxastoreauditinfo.html){:target="_blank"}
 
   创建门店小程序提交后需要公众号管理员确认通过后才可进行审核。如果主管理员24小时超时未确认，才能再次提交。
   """
@@ -37,7 +37,7 @@ defmodule WeChat.MiniProgram.Store do
 
   @doc """
   修改门店小程序信息 -
-  [官方文档](#{@doc_link}#_4-修改门店小程序信息){:target="_blank"}
+  [官方文档](#{@doc_link}/api_modifywxastore.html){:target="_blank"}
   """
   @spec modify(WeChat.client(), body) :: WeChat.response()
   def modify(client, body) do
@@ -45,8 +45,8 @@ defmodule WeChat.MiniProgram.Store do
   end
 
   @doc """
-  从腾讯地图拉取省市区信息 -
-  [官方文档](#{@doc_link}#_5-从腾讯地图拉取省市区信息){:target="_blank"}
+  获取省市区信息 -
+  [官方文档](#{@doc_link}/api_getdistrictlist.html){:target="_blank"}
   """
   @spec get_district(WeChat.client()) :: WeChat.response()
   def get_district(client) do
@@ -54,8 +54,8 @@ defmodule WeChat.MiniProgram.Store do
   end
 
   @doc """
-  在腾讯地图中搜索门店 -
-  [官方文档](#{@doc_link}#_6-在腾讯地图中搜索门店){:target="_blank"}
+  搜索门店地图信息 -
+  [官方文档](#{@doc_link}/api_poilistsearch.html){:target="_blank"}
   """
   @spec map_search(WeChat.client(), district_id, keyword :: String.t()) :: WeChat.response()
   def map_search(client, district_id, keyword) do
@@ -65,8 +65,8 @@ defmodule WeChat.MiniProgram.Store do
   end
 
   @doc """
-  在腾讯地图中创建门店 -
-  [官方文档](#{@doc_link}#_7-在腾讯地图中创建门店){:target="_blank"}
+  在地图中创建门店 -
+  [官方文档](#{@doc_link}/api_createnewpoid.html){:target="_blank"}
   """
   @spec create_map_poi(WeChat.client(), body) :: WeChat.response()
   def create_map_poi(client, body) do
@@ -74,8 +74,8 @@ defmodule WeChat.MiniProgram.Store do
   end
 
   @doc """
-  添加门店 -
-  [官方文档](#{@doc_link}#_8-添加门店){:target="_blank"}
+  新增门店 -
+  [官方文档](#{@doc_link}/api_addentityshop.html){:target="_blank"}
   """
   @spec add(WeChat.client(), body) :: WeChat.response()
   def add(client, body) do
@@ -84,7 +84,7 @@ defmodule WeChat.MiniProgram.Store do
 
   @doc """
   更新门店信息 -
-  [官方文档](#{@doc_link}#_9-更新门店信息){:target="_blank"}
+  [官方文档](#{@doc_link}/api_newupdatepoi.html){:target="_blank"}
   """
   @spec update(WeChat.client(), body) :: WeChat.response()
   def update(client, body) do
@@ -92,8 +92,8 @@ defmodule WeChat.MiniProgram.Store do
   end
 
   @doc """
-  获取单个门店信息 -
-  [官方文档](#{@doc_link}#_10-获取单个门店信息){:target="_blank"}
+  获取门店详情 -
+  [官方文档](#{@doc_link}/api_newgetpoi.html){:target="_blank"}
   """
   @spec get(WeChat.client(), poi_id) :: WeChat.response()
   def get(client, poi_id) do
@@ -103,8 +103,8 @@ defmodule WeChat.MiniProgram.Store do
   end
 
   @doc """
-  获取门店信息列表 -
-  [官方文档](#{@doc_link}#_11-获取门店信息列表){:target="_blank"}
+  获取门店列表 -
+  [官方文档](#{@doc_link}/api_newgetpoilist.html){:target="_blank"}
   """
   @spec list(WeChat.client(), offset :: integer, limit :: integer) :: WeChat.response()
   def list(client, offset \\ 0, limit \\ 20) when limit <= 50 do
@@ -115,7 +115,7 @@ defmodule WeChat.MiniProgram.Store do
 
   @doc """
   删除门店 -
-  [官方文档](#{@doc_link}#_12-删除门店){:target="_blank"}
+  [官方文档](#{@doc_link}/api_newdelpoi.html){:target="_blank"}
   """
   @spec delete(WeChat.client(), poi_id) :: WeChat.response()
   def delete(client, poi_id) do
@@ -125,19 +125,8 @@ defmodule WeChat.MiniProgram.Store do
   end
 
   @doc """
-  门店小程序卡券 -
-  [官方文档](#{@doc_link}#_14-业务接口-门店小程序卡券){:target="_blank"}
-  """
-  @spec get_card(WeChat.client(), poi_id) :: WeChat.response()
-  def get_card(client, poi_id) do
-    client.post("/card/storewxa/get", json_map(poi_id: poi_id),
-      query: [access_token: client.get_access_token()]
-    )
-  end
-
-  @doc """
-  拉取类目 -
-  [官方文档](#{@doc_link}#_1-拉取门店小程序类目){:target="_blank"}
+  拉取门店小程序类目 -
+  [官方文档](#{@doc_link}/api_getwxastorecatelist.html){:target="_blank"}
   """
   @spec list_category(WeChat.client()) :: WeChat.response()
   def list_category(client) do

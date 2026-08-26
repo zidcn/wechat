@@ -4,7 +4,7 @@ defmodule WeChat.SubscribeMessage do
 
   同时支持
 
-  - [公众号](https://developers.weixin.qq.com/doc/offiaccount/Subscription_Messages/intro.html)
+  - [公众号](https://developers.weixin.qq.com/doc/service/guide/product/subscription_messages/intro.html)
   - [小程序](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/subscribe-message.html)
   """
   import Jason.Helpers
@@ -85,8 +85,8 @@ defmodule WeChat.SubscribeMessage do
         }
 
   @doc """
-  组合模板并添加至帐号下的个人模板库 -
-  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/mp-message-management/subscribe-message/addMessageTemplate.html){:target="_blank"}
+  选用模板 -
+  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/mp-message-management/subscribe-message/api_addwxanewtemplate.html){:target="_blank"}
   """
   @spec add_template(WeChat.client(), tid, kid_list, scene_desc) :: WeChat.response()
   def add_template(client, tid, kid_list, scene_desc \\ "") do
@@ -98,8 +98,8 @@ defmodule WeChat.SubscribeMessage do
   end
 
   @doc """
-  删除帐号下的个人模板 -
-  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/mp-message-management/subscribe-message/deleteMessageTemplate.html){:target="_blank"}
+  删除模板 -
+  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/mp-message-management/subscribe-message/api_delwxanewtemplate.html){:target="_blank"}
   """
   @spec delete_template(WeChat.client(), pri_tmpl_id) :: WeChat.response()
   def delete_template(client, pri_tmpl_id) do
@@ -112,7 +112,7 @@ defmodule WeChat.SubscribeMessage do
 
   @doc """
   获取小程序账号的类目 -
-  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/mp-message-management/subscribe-message/getCategory.html){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/mp-message-management/subscribe-message/api_getcategory.html){:target="_blank"}
   """
   @spec get_category(WeChat.client()) :: WeChat.response()
   def get_category(client) do
@@ -120,8 +120,8 @@ defmodule WeChat.SubscribeMessage do
   end
 
   @doc """
-  获取模板标题下的关键词列表 -
-  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/mp-message-management/subscribe-message/getPubTemplateKeyWordsById.html){:target="_blank"}
+  获取模板中的关键词 -
+  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/mp-message-management/subscribe-message/api_getpubnewtemplatekeywords.html){:target="_blank"}
   """
   @spec get_pub_template_key_words_by_id(WeChat.client(), tid) :: WeChat.response()
   def get_pub_template_key_words_by_id(client, tid) do
@@ -131,8 +131,8 @@ defmodule WeChat.SubscribeMessage do
   end
 
   @doc """
-  获取帐号所属类目下的公共模板标题 -
-  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/mp-message-management/subscribe-message/getPubTemplateTitleList.html){:target="_blank"}
+  获取类目下的公共模板 -
+  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/mp-message-management/subscribe-message/api_getpubnewtemplatetitles.html){:target="_blank"}
   """
   @spec get_pub_template_titles(
           WeChat.client(),
@@ -152,8 +152,8 @@ defmodule WeChat.SubscribeMessage do
   end
 
   @doc """
-  获取当前帐号下的个人模板列表 -
-  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/mp-message-management/subscribe-message/getMessageTemplateList.html){:target="_blank"}
+  获取已有模板列表 -
+  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/mp-message-management/subscribe-message/api_getwxapubnewtemplate.html){:target="_blank"}
   """
   @spec get_templates(WeChat.client()) :: WeChat.response()
   def get_templates(client) do
@@ -163,8 +163,8 @@ defmodule WeChat.SubscribeMessage do
   @doc """
   发送订阅消息
 
-  - [公众号](https://developers.weixin.qq.com/doc/offiaccount/Subscription_Messages/api.html#send发送订阅通知){:target="_blank"}
-  - [小程序](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/mp-message-management/subscribe-message/sendMessage.html){:target="_blank"}
+  - [公众号](https://developers.weixin.qq.com/doc/service/api/notify/notify/api_sendnewsubscribemsg.html){:target="_blank"}
+  - [小程序](https://developers.weixin.qq.com/miniprogram/dev/server/API/mp-message-management/subscribe-message/api_sendmessage.html){:target="_blank"}
   """
   case Module.split(__MODULE__) do
     [_, _] ->

@@ -2,7 +2,7 @@ defmodule WeChat.Pay.Sandbox do
   @moduledoc """
   支付沙盒(仅适用于v2)
 
-  [官方文档](https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=23_1&index=2)
+  [官方文档](https://pay.weixin.qq.com/doc/v2/merchant/4011984810){:target="_blank"}
   """
 
   @spec get_sign_key(Pay.client(), nonce_str :: binary) :: WeChat.response()

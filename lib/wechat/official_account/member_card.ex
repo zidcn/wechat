@@ -1,14 +1,14 @@
 defmodule WeChat.MemberCard do
   @moduledoc """
-  微信卡券 - 会员卡
+  微信卡券/会员卡专区
 
-  [官方文档](https://developers.weixin.qq.com/doc/offiaccount/Cards_and_Offer/Membership_Cards/introduction.html){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/doc/service/guide/product/card/Membership_Cards/introduction.html){:target="_blank"}
   """
   import Jason.Helpers
   alias WeChat.Card
 
-  @create_doc_link "https://developers.weixin.qq.com/doc/offiaccount/Cards_and_Offer/Membership_Cards/Create_a_membership_card.html"
-  @mange_doc_link "https://developers.weixin.qq.com/doc/offiaccount/Cards_and_Offer/Membership_Cards/Manage_Member_Card.html"
+  @create_doc_link "https://developers.weixin.qq.com/doc/service/guide/product/card/Membership_Cards/Create_a_membership_card.html"
+  @mange_doc_link "https://developers.weixin.qq.com/doc/service/guide/product/card/Membership_Cards/Manage_Member_Card.html"
 
   @doc """
   创建会员卡接口 -
@@ -16,7 +16,7 @@ defmodule WeChat.MemberCard do
 
   支持开发者调用该接口创建会员卡，并获取 `card_id`，用于投放。
 
-  调用该接口前，请开发者详读创建卡券接口部分 [上传图片接口、首页](http://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1451025056&token=&lang=zh_CN&anchor=2.3) 部分，快速录入会员卡卡面必要信息。
+  调用该接口前，请开发者详读创建卡券接口部分 [上传图片接口、首页](https://developers.weixin.qq.com/doc/service/guide/product/card/WeChat_Coupon_Interface.html) 部分，快速录入会员卡卡面必要信息。
   """
   @spec create(WeChat.client(), body :: map) :: WeChat.response()
   def create(client, body) do

@@ -1,9 +1,13 @@
 defmodule WeChat.Material do
-  @moduledoc "素材管理"
+  @moduledoc """
+  素材管理
+
+  [官方文档](https://developers.weixin.qq.com/doc/service/guide/product/asset.html){:target="_blank"}
+  """
   import Jason.Helpers
   alias Tesla.Multipart
 
-  @doc_link "https://developers.weixin.qq.com/doc/offiaccount/Asset_Management"
+  @doc_link "https://developers.weixin.qq.com/doc/service/api/material"
 
   @typedoc """
   素材的类型
@@ -35,7 +39,7 @@ defmodule WeChat.Material do
 
   @doc """
   新增临时素材(文件路径) -
-  [官方文档](#{@doc_link}/New_temporary_materials.html){:target="_blank"}
+  [官方文档](#{@doc_link}/temporary/api_uploadtempmedia.html){:target="_blank"}
 
   公众号经常有需要用到一些临时性的多媒体素材的场景，例如在使用接口特别是发送消息时，对多媒体文件、多媒体消息的获取和调用等操作，
   是通过media_id来进行的。素材管理接口对所有认证的订阅号和服务号开放。通过本接口，公众号可以新增临时素材（即上传临时多媒体文件）。
@@ -53,7 +57,7 @@ defmodule WeChat.Material do
 
   @doc """
   新增临时素材(文件内容) -
-  [官方文档](#{@doc_link}/New_temporary_materials.html){:target="_blank"}
+  [官方文档](#{@doc_link}/temporary/api_uploadtempmedia.html){:target="_blank"}
 
   公众号经常有需要用到一些临时性的多媒体素材的场景，例如在使用接口特别是发送消息时，对多媒体文件、多媒体消息的获取和调用等操作，
   是通过media_id来进行的。素材管理接口对所有认证的订阅号和服务号开放。通过本接口，公众号可以新增临时素材（即上传临时多媒体文件）。
@@ -71,7 +75,7 @@ defmodule WeChat.Material do
 
   @doc """
   获取临时素材 -
-  [官方文档](#{@doc_link}/Get_temporary_materials.html){:target="_blank"}
+  [官方文档](#{@doc_link}/temporary/api_getmedia.html){:target="_blank"}
 
   公众号可以使用本接口获取临时素材（即下载临时的多媒体文件）。
   """
@@ -102,7 +106,7 @@ defmodule WeChat.Material do
 
   @doc """
   上传图文消息内的图片获取URL -
-  [官方文档](#{@doc_link}/Adding_Permanent_Assets.html#上传图文消息内的图片获取URL){:target="_blank"}
+  [官方文档](#{@doc_link}/permanent/api_uploadimage.html){:target="_blank"}
 
   本接口所上传的图片不占用公众号的素材库中图片数量的100000个的限制。图片仅支持jpg/png格式，大小必须在1MB以下。
   """
@@ -119,7 +123,7 @@ defmodule WeChat.Material do
 
   @doc """
   上传图文消息内的图片获取URL(binary) -
-  [官方文档](#{@doc_link}/Adding_Permanent_Assets.html#上传图文消息内的图片获取URL){:target="_blank"}
+  [官方文档](#{@doc_link}/permanent/api_uploadimage.html){:target="_blank"}
 
   本接口所上传的图片不占用公众号的素材库中图片数量的100000个的限制。图片仅支持jpg/png格式，大小必须在1MB以下。
   """
@@ -164,10 +168,10 @@ defmodule WeChat.Material do
   end
 
   @doc """
-  新增其他类型永久素材 -
-  [官方文档](#{@doc_link}/Adding_Permanent_Assets.html#新增其他类型永久素材){:target="_blank"}
+  上传永久素材 -
+  [官方文档](#{@doc_link}/permanent/api_addmaterial.html){:target="_blank"}
 
-  请注意：图片素材将进入公众平台官网素材管理模块中的默认分组。
+  本接口用于新增图片/语音/视频等类型的永久素材。
   """
   @spec add_material(WeChat.client(), material_type, file_path) :: WeChat.response()
   def add_material(client, type, file_path) do
@@ -182,9 +186,9 @@ defmodule WeChat.Material do
 
   @doc """
   新增其他类型永久素材(binary) -
-  [官方文档](#{@doc_link}/Adding_Permanent_Assets.html#新增其他类型永久素材){:target="_blank"}
+  [官方文档](#{@doc_link}/permanent/api_addmaterial.html){:target="_blank"}
 
-  请注意：图片素材将进入公众平台官网素材管理模块中的默认分组。
+  本接口用于新增图片/语音/视频等类型的永久素材。
   """
   @spec add_material(WeChat.client(), material_type, filename, file_data) :: WeChat.response()
   def add_material(client, type, filename, file_data) do
@@ -202,9 +206,9 @@ defmodule WeChat.Material do
 
   @doc """
   新增其他类型永久素材 - 视频 -
-  [官方文档](#{@doc_link}/Adding_Permanent_Assets.html#新增其他类型永久素材){:target="_blank"}
+  [官方文档](#{@doc_link}/permanent/api_addmaterial.html){:target="_blank"}
 
-  请注意：图片素材将进入公众平台官网素材管理模块中的默认分组。
+  本接口用于新增图片/语音/视频等类型的永久素材。
   """
   @spec add_video_material(WeChat.client(), title, introduction, file_path) :: WeChat.response()
   def add_video_material(client, title, introduction, file_path) do
@@ -222,9 +226,9 @@ defmodule WeChat.Material do
 
   @doc """
   新增其他类型永久素材(binary) - 视频 -
-  [官方文档](#{@doc_link}/Adding_Permanent_Assets.html#新增其他类型永久素材){:target="_blank"}
+  [官方文档](#{@doc_link}/permanent/api_addmaterial.html){:target="_blank"}
 
-  请注意：图片素材将进入公众平台官网素材管理模块中的默认分组。
+  本接口用于新增图片/语音/视频等类型的永久素材。
   """
   @spec add_video_material(WeChat.client(), title, introduction, filename, file_data) ::
           WeChat.response()
@@ -246,7 +250,7 @@ defmodule WeChat.Material do
 
   @doc """
   获取永久素材 -
-  [官方文档](#{@doc_link}/Getting_Permanent_Assets.html){:target="_blank"}
+  [官方文档](#{@doc_link}/permanent/api_getmaterial.html){:target="_blank"}
 
   在新增了永久素材后，开发者可以根据media_id通过本接口下载永久素材。公众号在公众平台官网素材管理模块中新建的永久素材，
   可通过"获取素材列表"获知素材的media_id。
@@ -264,7 +268,7 @@ defmodule WeChat.Material do
 
   @doc """
   删除永久素材 -
-  [官方文档](#{@doc_link}/Deleting_Permanent_Assets.html){:target="_blank"}
+  [官方文档](#{@doc_link}/permanent/api_delmaterial.html){:target="_blank"}
 
   在新增了永久素材后，开发者可以根据本接口来删除不再需要的永久素材，节省空间。
 
@@ -314,8 +318,8 @@ defmodule WeChat.Material do
   end
 
   @doc """
-  获取素材总数 -
-  [官方文档](#{@doc_link}/Get_the_total_of_all_materials.html){:target="_blank"}
+  获取永久素材总数 -
+  [官方文档](#{@doc_link}/permanent/api_getmaterialcount.html){:target="_blank"}
 
   开发者可以根据本接口来获取永久素材的列表，需要时也可保存到本地。
 
@@ -333,8 +337,8 @@ defmodule WeChat.Material do
   end
 
   @doc """
-  获取素材列表 -
-  [官方文档](#{@doc_link}/Get_materials_list.html){:target="_blank"}
+  获取永久素材列表 -
+  [官方文档](#{@doc_link}/permanent/api_batchgetmaterial.html){:target="_blank"}
 
   在新增了永久素材后，开发者可以分类型获取永久素材的列表。
 
@@ -361,7 +365,7 @@ defmodule WeChat.Material do
 
   @doc """
   获取素材列表(stream) -
-  [官方文档](#{@doc_link}/Get_materials_list.html){:target="_blank"}
+  [官方文档](#{@doc_link}/permanent/api_batchgetmaterial.html){:target="_blank"}
 
   在新增了永久素材后，开发者可以分类型获取永久素材的列表。
 

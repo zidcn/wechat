@@ -33,8 +33,8 @@ defmodule WeChat.MiniProgram.Auth do
   [登录流程](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/login.html)
 
   官方文档:
-    * [小程序](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/user-login/code2Session.html){:target="_blank"}
-    * [第三方平台](https://developers.weixin.qq.com/doc/oplatform/openApi/OpenApiDoc/miniprogram-management/login/thirdpartyCode2Session.html){:target="_blank"}
+    * [小程序](https://developers.weixin.qq.com/miniprogram/dev/server/API/user-login/api_code2session.html){:target="_blank"}
+    * [第三方平台](https://developers.weixin.qq.com/doc/oplatform/openApi/miniprogram-management/login/api_thirdpartycode2session.html){:target="_blank"}
   """
   @spec code2session(WeChat.client(), code :: String.t()) :: WeChat.response()
   def code2session(client, code) do
@@ -64,7 +64,7 @@ defmodule WeChat.MiniProgram.Auth do
 
   @doc """
   检验登录态 -
-  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/user-login/checkSessionKey.html){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/user-login/api_checksessionkey.html){:target="_blank"}
 
   校验服务器所保存的登录态 session_key 是否合法。为了保持 session_key 私密性，接口不明文传输 session_key，而是通过校验登录态签名完成。
   """
@@ -84,7 +84,7 @@ defmodule WeChat.MiniProgram.Auth do
 
   @doc """
   重置登录态 -
-  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/user-login/ResetUserSessionKey.html){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/user-login/api_resetusersessionkey.html){:target="_blank"}
 
   重置指定的登录态 session_key。为了保持 session_key 私密性，接口不明文传入 session_key，而是通过校验登录态签名完成。
   """
@@ -113,7 +113,7 @@ defmodule WeChat.MiniProgram.Auth do
 
   @doc """
   获取AccessToken -
-  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/mp-access-token/getAccessToken.html){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/mp-access-token/api_getaccesstoken.html){:target="_blank"}
   """
   @spec get_access_token(WeChat.client()) :: WeChat.response()
   def get_access_token(client) do

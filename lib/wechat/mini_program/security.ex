@@ -36,7 +36,7 @@ defmodule WeChat.MiniProgram.Security do
 
   @doc """
   图片/音频异步检测
-  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/sec-center/sec-check/mediaCheckAsync.html){:target="_blank"}
+  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/sec-center/sec-check/api_mediacheckasync.html){:target="_blank"}
 
   异步校验图片/音频是否含有违法违规内容。
 
@@ -59,7 +59,7 @@ defmodule WeChat.MiniProgram.Security do
 
   @doc """
   文本检测
-  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/sec-center/sec-check/msgSecCheck.html){:target="_blank"}
+  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/sec-center/sec-check/api_msgseccheck.html){:target="_blank"}
 
   检查一段文本是否含有违法违规内容。
 

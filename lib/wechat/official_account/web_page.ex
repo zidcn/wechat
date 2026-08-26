@@ -3,8 +3,8 @@ defmodule WeChat.WebPage do
   网页开发
 
   ## API Docs
-    * [网页授权](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html){:target="_blank"}
-    * [JS-SDK](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/JS-SDK.html){:target="_blank"}
+    * [网页授权](https://developers.weixin.qq.com/doc/service/guide/h5/auth.html){:target="_blank"}
+    * [JS-SDK](https://developers.weixin.qq.com/doc/service/guide/h5/jssdk.html){:target="_blank"}
   """
   alias WeChat.{Requester, Utils, Card, User, Storage.Cache}
 

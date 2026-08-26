@@ -4,8 +4,8 @@ defmodule WeChat.Pay.Middleware.VerifySignature do
 
   Tesla Middleware
 
-  - [如何验证签名](https://pay.weixin.qq.com/docs/merchant/development/interface-rules/signature-verification.html){:target="_blank"}
-  - [签名相关问题](https://pay.weixin.qq.com/docs/merchant/development/interface-rules/signature-faqs.html){:target="_blank"}
+  - [如何验证签名](https://pay.weixin.qq.com/doc/v3/merchant/4013053249){:target="_blank"}
+  - [签名相关问题](https://pay.weixin.qq.com/doc/v3/merchant/4012072670){:target="_blank"}
   """
   @behaviour Tesla.Middleware
   alias WeChat.Pay.{Crypto, Certificates}

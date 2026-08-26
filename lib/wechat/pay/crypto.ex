@@ -20,7 +20,7 @@ defmodule WeChat.Pay.Crypto do
 
   @doc """
   加密敏感信息 -
-  [官方文档](https://pay.weixin.qq.com/docs/merchant/development/interface-rules/sensitive-data-encryption.html){:target="_blank"}
+  [官方文档](https://pay.weixin.qq.com/doc/v3/merchant/4013053257){:target="_blank"}
   """
   def encrypt_secret_data(data, public_key) do
     :public_key.encrypt_public(data, public_key, rsa_pad: :rsa_pkcs1_oaep_padding)
@@ -28,7 +28,7 @@ defmodule WeChat.Pay.Crypto do
 
   @doc """
   解密敏感信息 -
-  [官方文档](https://pay.weixin.qq.com/docs/merchant/development/interface-rules/sensitive-data-encryption.html){:target="_blank"}
+  [官方文档](https://pay.weixin.qq.com/doc/v3/merchant/4013053257){:target="_blank"}
   """
   def decrypt_secret_data(cipher_text, private_key) do
     :public_key.decrypt_private(cipher_text, private_key, rsa_pad: :rsa_pkcs1_oaep_padding)
@@ -36,7 +36,7 @@ defmodule WeChat.Pay.Crypto do
 
   @doc """
   验签 -
-  [官方文档](https://pay.weixin.qq.com/docs/merchant/development/interface-rules/signature-verification.html){:target="_blank"}
+  [官方文档](https://pay.weixin.qq.com/doc/v3/merchant/4013053249){:target="_blank"}
   """
   def verify(signature, timestamp, nonce, body, public_key) do
     case Base.decode64(signature, padding: false) do
@@ -50,7 +50,7 @@ defmodule WeChat.Pay.Crypto do
 
   @doc """
   签名 -
-  [官方文档](https://pay.weixin.qq.com/docs/merchant/development/interface-rules/signature-generation.html){:target="_blank"}
+  [官方文档](https://pay.weixin.qq.com/doc/v3/merchant/4012365334){:target="_blank"}
   """
   def sign(env, timestamp, nonce_str, private_key) do
     method = to_string(env.method) |> String.upcase()
@@ -69,7 +69,7 @@ defmodule WeChat.Pay.Crypto do
 
   @doc """
   签名(v2) -
-  [官方文档](https://pay.weixin.qq.com/wiki/doc/api/micropay.php?chapter=4_3){:target="_blank"}
+  [官方文档](https://pay.weixin.qq.com/doc/v2/merchant/4011985891){:target="_blank"}
   """
   @spec v2_sign(data :: map, key :: binary) :: signature :: binary
   def v2_sign(params, key) when is_map(params) do

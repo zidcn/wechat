@@ -2,7 +2,7 @@ defmodule WeChat.Refresher.Default do
   @moduledoc """
   AccessToken 刷新器 - 用于定时刷新 AccessToken
 
-  [官方说明](https://developers.weixin.qq.com/doc/offiaccount/Getting_Started/Getting_Started_Guide.html#_1-5-%E9%87%8D%E8%A6%81%E4%BA%8B%E6%83%85%E6%8F%90%E5%89%8D%E4%BA%A4%E4%BB%A3)
+  [官方说明](https://developers.weixin.qq.com/doc/service/guide/dev/api/)
 
   本模块为默认的刷新器
 

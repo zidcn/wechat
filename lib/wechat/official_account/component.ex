@@ -2,7 +2,7 @@ defmodule WeChat.Component do
   @moduledoc """
   第三方平台
 
-  [官方文档](https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/Third_party_platform_appid.html){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/product/Third_party_platform_appid.html){:target="_blank"}
   """
   import Jason.Helpers
   alias WeChat.Storage.Cache
@@ -19,11 +19,10 @@ defmodule WeChat.Component do
   @type auth_type :: 1 | 2 | 3
   @type biz_appid :: WeChat.appid()
 
-  @doc_link "https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/api"
+  @doc_link "https://developers.weixin.qq.com/doc/oplatform/openApi"
 
   @typedoc """
-  选项名称及可选值说明 -
-  [官方文档](#{@doc_link}/api_get_authorizer_option.html#选项名称及可选值说明){:target="_blank"}
+  选项名称及可选值说明
 
   |   option_name    |   选项名说明    | option_value | 选项值说明 |
   | ---------------- | ------------  | ------------ | -------- |
@@ -39,7 +38,7 @@ defmodule WeChat.Component do
 
   @doc """
   生成授权链接 -
-  [官方文档](#{@doc_link}/Before_Develop/Authorization_Process_Technical_Description.html){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/Before_Develop/Authorization_Process_Technical_Description.html){:target="_blank"}
   """
   @spec bind_component_url(WeChat.client(), redirect_uri :: String.t(), auth_type() | biz_appid()) ::
           url :: String.t() | WeChat.response()
@@ -73,9 +72,9 @@ defmodule WeChat.Component do
 
   @doc """
   查询接口调用次数 -
-  [官方文档](#{@doc_link}/openApi/get_api_quota.html){:target="_blank"}
+  [官方文档](#{@doc_link}/openapi/api_getapiquota.html){:target="_blank"}
 
-  [接口调用频次限制说明](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/API_Call_Limits.html){:target="_blank"}
+  [接口调用额度说明](https://developers.weixin.qq.com/doc/service/guide/dev/api/limit.html){:target="_blank"}
   """
   @spec get_quota(WeChat.client(), cgi_path :: String.t()) :: WeChat.response()
   def get_quota(client, cgi_path) do
@@ -88,9 +87,9 @@ defmodule WeChat.Component do
 
   @doc """
   接口调用次数清零 -
-  [官方文档](#{@doc_link}/openApi/clear_quota.html){:target="_blank"}
+  [官方文档](#{@doc_link}/openapi/api_clearquota.html){:target="_blank"}
 
-  [接口调用频次限制说明](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/API_Call_Limits.html){:target="_blank"}
+  [接口调用额度说明](https://developers.weixin.qq.com/doc/service/guide/dev/api/limit.html){:target="_blank"}
   """
   @spec clear_quota(WeChat.client()) :: WeChat.response()
   def clear_quota(client) do
@@ -105,7 +104,7 @@ defmodule WeChat.Component do
 
   @doc """
   获取令牌 -
-  [官方文档](#{@doc_link}/ThirdParty/token/component_access_token.html){:target="_blank"}
+  [官方文档](#{@doc_link}/ticket-token/api_getcomponentaccesstoken.html){:target="_blank"}
   """
   @spec get_component_token(WeChat.client()) :: WeChat.response()
   def get_component_token(client) do
@@ -119,10 +118,10 @@ defmodule WeChat.Component do
 
   @doc """
   获取令牌 -
-  [官方文档](#{@doc_link}/ThirdParty/token/component_access_token.html){:target="_blank"}
+  [官方文档](#{@doc_link}/ticket-token/api_getcomponentaccesstoken.html){:target="_blank"}
 
   ## ticket 来源
-    [验证票据](#{@doc_link}/ThirdParty/token/component_verify_ticket.html){:target="_blank"}
+    [验证票据](https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/Before_Develop/component_verify_ticket.html){:target="_blank"}
   """
   @spec get_component_token(WeChat.client(), ticket :: String.t()) :: WeChat.response()
   def get_component_token(client, ticket) do
@@ -138,7 +137,9 @@ defmodule WeChat.Component do
 
   @doc """
   获取预授权码 -
-  [官方文档](#{@doc_link}/ThirdParty/token/pre_auth_code.html){:target="_blank"}
+  [官方文档](#{@doc_link}/ticket-token/api_getpreauthcode.html){:target="_blank"}
+
+  该接口用于获取预授权码（pre_auth_code）是第三方平台方实现授权托管的必备信息，每个预授权码有效期为 1800秒
   """
   @spec create_pre_auth_code(WeChat.client()) :: WeChat.response()
   def create_pre_auth_code(client) do
@@ -152,8 +153,11 @@ defmodule WeChat.Component do
   end
 
   @doc """
-  使用授权码获取授权信息 -
-  [官方文档](#{@doc_link}/ThirdParty/token/authorization_info.html){:target="_blank"}
+  获取刷新令牌 -
+  [官方文档](#{@doc_link}/ticket-token/api_getauthorizerrefreshtoken.html){:target="_blank"}
+
+  - 当用户在第三方平台授权页中完成授权流程后，第三方平台开发者可以在回调 URI 中通过 URL 参数获取授权码(authorization_code)。然后使用该接口可以换取公众号/小程序的刷新令牌（authorizer_refresh_token）。
+  - 建议保存授权信息中的刷新令牌（authorizer_refresh_token)
   """
   @spec query_auth(WeChat.client(), authorization_code :: String.t()) :: WeChat.response()
   def query_auth(client, authorization_code) do
@@ -171,7 +175,7 @@ defmodule WeChat.Component do
 
   @doc """
   获取/刷新接口调用令牌 -
-  [官方文档](#{@doc_link}/ThirdParty/token/api_authorizer_token.html){:target="_blank"}
+  [官方文档](#{@doc_link}/ticket-token/api_getauthorizeraccesstoken.html){:target="_blank"}
   """
   @spec authorizer_token(WeChat.client()) :: WeChat.response()
   def authorizer_token(client) do
@@ -185,7 +189,7 @@ defmodule WeChat.Component do
 
   @doc """
   获取/刷新接口调用令牌 -
-  [官方文档](#{@doc_link}/ThirdParty/token/api_authorizer_token.html){:target="_blank"}
+  [官方文档](#{@doc_link}/ticket-token/api_getauthorizeraccesstoken.html){:target="_blank"}
   """
   @spec authorizer_token(WeChat.client(), authorizer_refresh_token :: String.t()) ::
           WeChat.response()
@@ -205,8 +209,8 @@ defmodule WeChat.Component do
   end
 
   @doc """
-  获取授权方的帐号基本信息 -
-  [官方文档](#{@doc_link}/ThirdParty/token/api_get_authorizer_info.html){:target="_blank"}
+  获取授权账号详情 -
+  [官方文档](#{@doc_link}/authorization-management/api_getauthorizerinfo.html){:target="_blank"}
   """
   @spec get_authorizer_info(WeChat.client()) :: WeChat.response()
   def get_authorizer_info(client) do
@@ -221,7 +225,7 @@ defmodule WeChat.Component do
 
   @doc """
   获取授权方选项信息 -
-  [官方文档](#{@doc_link}/ThirdParty/Account_Authorization/api_get_authorizer_option.html){:target="_blank"}
+  [官方文档](#{@doc_link}/authorization-management/api_getauthorizeroptioninfo.html){:target="_blank"}
   """
   @spec get_authorizer_option(WeChat.client(), option_name) :: WeChat.response()
   def get_authorizer_option(client, option_name) do
@@ -240,7 +244,7 @@ defmodule WeChat.Component do
 
   @doc """
   拉取所有已授权的帐号信息 -
-  [官方文档](#{@doc_link}/ThirdParty/Account_Authorization/api_get_authorizer_list.html){:target="_blank"}
+  [官方文档](#{@doc_link}/authorization-management/api_getauthorizerlist.html){:target="_blank"}
   """
   @spec get_authorizer_list(WeChat.client(), offset :: integer, count :: integer) ::
           WeChat.response()
@@ -255,12 +259,11 @@ defmodule WeChat.Component do
   end
 
   @doc """
-  创建开放平台帐号并绑定公众号/小程序 -
-  [官方文档](#{@doc_link}/account/create.html){:target="_blank"}
+  创建开放平台账号 -
+  [官方文档](#{@doc_link}/openplatform-management/api_createopenaccount.html){:target="_blank"}
 
-  该 API 用于创建一个开放平台帐号，并将一个尚未绑定开放平台帐号的公众号/小程序绑定至该开放平台帐号上。
-
-  新创建的开放平台帐号的主体信息将设置为与之绑定的公众号或小程序的主体。
+  - 该 API 用于创建一个开放平台账号，并将一个尚未绑定开放平台账号的公众号/小程序绑定至该开放平台账号上。
+  - 新创建的开放平台账号的主体信息将设置为与之绑定的公众号或小程序的主体。
   """
   @spec create(WeChat.client(), WeChat.appid()) :: WeChat.response()
   def create(client, appid) do
@@ -272,8 +275,8 @@ defmodule WeChat.Component do
   end
 
   @doc """
-  将公众号/小程序绑定到开放平台帐号下 -
-  [官方文档](#{@doc_link}/account/bind.html){:target="_blank"}
+  绑定开放平台账号 -
+  [官方文档](#{@doc_link}/openplatform-management/api_bindopenaccount.html){:target="_blank"}
 
   该 API 用于将一个尚未绑定开放平台帐号的公众号或小程序绑定至指定开放平台帐号上。
 
@@ -289,8 +292,8 @@ defmodule WeChat.Component do
   end
 
   @doc """
-  将公众号/小程序从开放平台帐号下解绑 -
-  [官方文档](#{@doc_link}/account/unbind.html){:target="_blank"}
+  解除绑定开放平台账号 -
+  [官方文档](#{@doc_link}/openplatform-management/api_unbindopenaccount.html){:target="_blank"}
 
   该 API 用于将一个公众号或小程序与指定开放平台帐号解绑。
 
@@ -306,8 +309,8 @@ defmodule WeChat.Component do
   end
 
   @doc """
-  获取公众号/小程序所绑定的开放平台帐号 -
-  [官方文档](#{@doc_link}/account/get.html){:target="_blank"}
+  获取开放平台账号 -
+  [官方文档](#{@doc_link}/openplatform-management/api_getopenaccount.html){:target="_blank"}
 
   该 API 用于获取公众号或小程序所绑定的开放平台帐号。
   """

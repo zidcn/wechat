@@ -10,17 +10,17 @@
 
 - 目前 `Elixir` 中支持最完善的微信SDK
 - 支持: 
-  - `WeChat` => [公众号](https://developers.weixin.qq.com/doc/offiaccount/Getting_Started/Overview.html)
+  - `WeChat` => [公众号](https://developers.weixin.qq.com/doc/service/guide/dev)
   - `WeChat` => [小程序](https://developers.weixin.qq.com/miniprogram/dev/framework/)
   - `WeChat` => [第三方应用](https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/getting_started/how_to_read.html)
   - `WeChat.Work` => [企业微信](https://developer.work.weixin.qq.com/document/path/90556)
-  - `WeChat.Pay` => [微信支付](https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pages/index.shtml)
+  - `WeChat.Pay` => [微信支付](https://pay.weixin.qq.com/doc/v3/merchant/4012062524)
 
 ### Links
 
 - [WeChat SDK 使用指南](https://feng19.com/2022/07/08/wechat_for_elixir_usage/) - [示例项目](https://github.com/feng19/wechat_demo)
 - [WeChat SDK(支付) 使用指南](https://feng19.com/2024/02/05/wechat-pay-for-elixir-usage/) - [示例项目](https://github.com/feng19/wechat_pay_demo)
-- [微信官方文档 - 开发前必读](https://developers.weixin.qq.com/doc/offiaccount/Getting_Started/Getting_Started_Guide.html)
+- [微信官方文档 - 开发前必读](https://developers.weixin.qq.com/doc/service/guide/)
 - [微信官方文档 - 在线文档](https://hex.pm/packages/wechat_sdk)
 
 ## Installation
@@ -54,8 +54,7 @@ end
 
 ### 自动刷新 AccessToken
 
-在调用接口之前，必须先获取 [`AccessToken`](https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Get_access_token.html) 才能 调用接口，
-[官方说明](https://developers.weixin.qq.com/doc/offiaccount/Getting_Started/Getting_Started_Guide.html#_1-5-%E9%87%8D%E8%A6%81%E4%BA%8B%E6%83%85%E6%8F%90%E5%89%8D%E4%BA%A4%E4%BB%A3)
+在调用接口之前，必须先获取 [`AccessToken`](https://developers.weixin.qq.com/doc/service/guide/dev/api/) 才能 调用接口
 
 通过下面的方式激活 `AccessToken` 自动刷新器:
 
@@ -79,7 +78,7 @@ WeChat.add_to_refresher(YourApp.WeChatAppCodeName)
 
 ## 网页授权
 
-[官方文档](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html)
+[官方文档](https://developers.weixin.qq.com/doc/service/guide/h5/auth.html)
 
 把下面的代码放入到 `router`:
 
@@ -100,7 +99,7 @@ end
 
 ## JS-SDK setup
 
-[设置指南](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/JS-SDK.html#4)
+[设置指南](https://developers.weixin.qq.com/doc/service/guide/h5/jssdk.html#4)
 
 如果网页内用到了 JS-SDK，如：
 
@@ -120,7 +119,7 @@ Setup 参数有 5 个必填项，其中，`jsApiList` 根据业务需要填写�
 
 ## 微信推送消息
 
-[接入指南](https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Access_Overview.html)
+[接入指南](https://developers.weixin.qq.com/doc/service/guide/dev/push/)
 
 - 填写服务器配置, 填入 `https://host/wx/event`
 - 定义 `client` 时必须设置: `encoding_aes_key` & `token`
@@ -137,7 +136,7 @@ forward "/wx/event", WeChat.Plug.EventHandler,
 
 微信提供申请测试号，用于快速测试
 
-- [申请公众号测试号](https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Requesting_an_API_Test_Account.html)
+- [申请公众号测试号](https://developers.weixin.qq.com/doc/service/guide/dev/#测试号申请)
 - [申请小程序测试号](https://developers.weixin.qq.com/miniprogram/dev/devtools/sandbox.html)
 
 ## Contributing

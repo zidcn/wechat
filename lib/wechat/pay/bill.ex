@@ -44,7 +44,7 @@ defmodule WeChat.Pay.Bill do
 
   @doc """
   申请交易账单 -
-  [官方文档](https://pay.weixin.qq.com/docs/merchant/apis/bill-download/trade-bill/get-trade-bill.html){:target="_blank"}
+  [官方文档](https://pay.weixin.qq.com/doc/v3/merchant/4013071227){:target="_blank"}
 
   微信支付按天提供交易账单文件，商户可以通过该接口获取账单文件的下载地址。
   文件内包含交易相关的金额、时间、营销等信息，供商户核对订单、退款、银行到账等情况。
@@ -71,7 +71,7 @@ defmodule WeChat.Pay.Bill do
 
   @doc """
   申请资金账单 -
-  [官方文档](https://pay.weixin.qq.com/docs/merchant/apis/bill-download/fund-bill/get-fund-bill.html){:target="_blank"}
+  [官方文档](https://pay.weixin.qq.com/doc/v3/merchant/4013071235){:target="_blank"}
 
   ## 下载接口说明
 
@@ -107,7 +107,7 @@ defmodule WeChat.Pay.Bill do
 
   @doc """
   下载 交易/资金 账单 -
-  [官方文档](https://pay.weixin.qq.com/docs/merchant/apis/bill-download/download-bill.html){:target="_blank"}
+  [官方文档](https://pay.weixin.qq.com/doc/v3/merchant/4013071238){:target="_blank"}
 
   本接口适用于下载交易账单和资金账单。
 

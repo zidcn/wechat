@@ -2,7 +2,7 @@ defmodule WeChat.BatchSends do
   @moduledoc """
   消息管理 - 群发接口和原创效验
 
-  [官方文档](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Batch_Sends_and_Originality_Checks.html){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/doc/subscription/api/notify/message/api_sendall.html){:target="_blank"}
 
   在公众平台网站上，为订阅号提供了每天一条的群发权限，为服务号提供每月（自然月）`4` 条的群发权限。
   而对于某些具备开发能力的公众号运营者，可以通过高级群发接口，实现更灵活的群发能力。
@@ -64,7 +64,7 @@ defmodule WeChat.BatchSends do
   import Jason.Helpers
   alias WeChat.{Material, Material.Article}
 
-  @doc_link "https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Batch_Sends_and_Originality_Checks.html"
+  @doc_link "https://developers.weixin.qq.com/doc/subscription/api/notify/message"
 
   @typedoc """
   图文消息的接收者，
@@ -196,7 +196,7 @@ defmodule WeChat.BatchSends do
 
   @doc """
   根据标签进行群发【订阅号与服务号认证后均可用】 -
-  [官方文档](#{@doc_link}#2){:target="_blank"}
+  [官方文档](#{@doc_link}/api_sendall.html#_2-请求参数){:target="_blank"}
   """
   @spec batch_send_by_tag(WeChat.client(), batch_send_by_tag_body) :: WeChat.response()
   def batch_send_by_tag(client, batch_send_by_tag_body) do
@@ -207,7 +207,7 @@ defmodule WeChat.BatchSends do
 
   @doc """
   根据OpenID列表群发【订阅号不可用，服务号认证后可用】 -
-  [官方文档](#{@doc_link}#3){:target="_blank"}
+  [官方文档](#{@doc_link}/api_sendall.html){:target="_blank"}
   """
   @spec batch_send_by_list(WeChat.client(), batch_send_by_list_body) :: WeChat.response()
   def batch_send_by_list(client, batch_send_by_list_body) do
@@ -218,7 +218,7 @@ defmodule WeChat.BatchSends do
 
   @doc """
   删除群发【订阅号与服务号认证后均可用】 -
-  [官方文档](#{@doc_link}#4){:target="_blank"}
+  [官方文档](#{@doc_link}/api_deletemassmsg.html){:target="_blank"}
 
   群发之后，随时可以通过该接口删除群发。
 
@@ -240,7 +240,7 @@ defmodule WeChat.BatchSends do
 
   @doc """
   删除群发【订阅号与服务号认证后均可用】 -
-  [官方文档](#{@doc_link}#4){:target="_blank"}
+  [官方文档](#{@doc_link}/api_deletemassmsg.html){:target="_blank"}
 
   群发之后，随时可以通过该接口删除群发。
   """
@@ -253,7 +253,7 @@ defmodule WeChat.BatchSends do
 
   @doc """
   预览接口【订阅号与服务号认证后均可用】 -
-  [官方文档](#{@doc_link}#5){:target="_blank"}
+  [官方文档](#{@doc_link}/api_preview.html){:target="_blank"}
 
   开发者可通过该接口发送消息给指定用户，在手机端查看消息的样式和排版。
 
@@ -268,7 +268,7 @@ defmodule WeChat.BatchSends do
 
   @doc """
   查询群发消息发送状态【订阅号与服务号认证后均可用】 -
-  [官方文档](#{@doc_link}#5){:target="_blank"}
+  [官方文档](#{@doc_link}/api_massmsgget.html){:target="_blank"}
 
   开发者可通过该接口发送消息给指定用户，在手机端查看消息的样式和排版。
 
@@ -283,7 +283,7 @@ defmodule WeChat.BatchSends do
 
   @doc """
   群发速度 - 获取 -
-  [官方文档](#{@doc_link}#9){:target="_blank"}
+  [官方文档](#{@doc_link}/api_getspeed.html){:target="_blank"}
   """
   @spec get_speed(WeChat.client()) :: WeChat.response()
   def get_speed(client) do
@@ -294,7 +294,7 @@ defmodule WeChat.BatchSends do
 
   @doc """
   群发速度 - 设置 -
-  [官方文档](#{@doc_link}#9){:target="_blank"}
+  [官方文档](#{@doc_link}/api_setspeed.html){:target="_blank"}
 
   群发速度的级别，是一个0到4的整数，数字越大表示群发速度越慢。
 

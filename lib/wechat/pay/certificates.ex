@@ -5,9 +5,9 @@ defmodule WeChat.Pay.Certificates do
   @moduledoc """
   微信支付 - 平台证书
 
-  - [平台证书简介](https://pay.weixin.qq.com/docs/merchant/development/interface-rules/wechatpay-certificates.html){:target="_blank"}
-  - [平台证书更新指引](https://pay.weixin.qq.com/docs/merchant/development/interface-rules/wechatpay-certificates-rotation.html){:target="_blank"}
-  - [证书相关问题](https://pay.weixin.qq.com/docs/merchant/development/interface-rules/certificate-faqs.html){:target="_blank"}
+  - [平台证书简介](https://pay.weixin.qq.com/doc/v3/merchant/4012068814){:target="_blank"}
+  - [平台证书更新指引](https://pay.weixin.qq.com/doc/v3/merchant/4012068829){:target="_blank"}
+  - [证书相关问题](https://pay.weixin.qq.com/doc/v3/merchant/4012069411){:target="_blank"}
   """
   alias WeChat.Pay
   alias WeChat.Pay.Crypto
@@ -17,7 +17,7 @@ defmodule WeChat.Pay.Certificates do
 
   @doc """
   下载平台证书 -
-  [官方文档](https://pay.weixin.qq.com/docs/merchant/apis/platform-certificate/api-v3-get-certificates/get.html){:target="_blank"}
+  [官方文档](https://pay.weixin.qq.com/doc/v3/merchant/4012551764){:target="_blank"}
   """
   @spec certificates(Pay.client(), first? :: boolean) :: {:ok, list(map)} | any
   def certificates(client, first? \\ false)
@@ -39,7 +39,7 @@ defmodule WeChat.Pay.Certificates do
 
   @doc """
   证书和回调报文解密 - 
-  [官方文档](https://pay.weixin.qq.com/docs/merchant/development/interface-rules/certificate-callback-decryption.html){:target="_blank"}
+  [官方文档](https://pay.weixin.qq.com/doc/v3/merchant/4012071382){:target="_blank"}
   """
   @spec decrypt_certificate(data :: map, Pay.client()) :: map
   def decrypt_certificate(

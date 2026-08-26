@@ -1,16 +1,20 @@
 defmodule WeChat.DraftBox do
-  @moduledoc "草稿箱"
+  @moduledoc """
+  草稿箱
+
+  [官方文档](https://developers.weixin.qq.com/doc/service/guide/product/draft.html){:target="_blank"}
+  """
   import Jason.Helpers
   alias WeChat.Material.Article
 
-  @doc_link "https://developers.weixin.qq.com/doc/offiaccount/Draft_Box"
+  @doc_link "https://developers.weixin.qq.com/doc/service/api/draftbox/draftmanage"
 
   @typedoc "草稿箱的media_id"
   @type media_id :: String.t()
 
   @doc """
   新建草稿 -
-  [官方文档](#{@doc_link}/Add_draft.html){:target="_blank"}
+  [官方文档](#{@doc_link}/api_draft_add){:target="_blank"}
 
   开发者可新增常用的素材到草稿箱中进行使用。上传到草稿箱中的素材被群发或发布后，该素材将从草稿箱中移除。新增草稿可在公众平台官网-草稿箱中查看和管理。
   """
@@ -22,8 +26,8 @@ defmodule WeChat.DraftBox do
   end
 
   @doc """
-  获取草稿 -
-  [官方文档](#{@doc_link}/Get_draft.html){:target="_blank"}
+  获取草稿详情 -
+  [官方文档](#{@doc_link}/api_getdraft.html){:target="_blank"}
 
   新增草稿后，开发者可以根据草稿指定的字段来下载草稿。
   """
@@ -36,7 +40,7 @@ defmodule WeChat.DraftBox do
 
   @doc """
   删除草稿 -
-  [官方文档](#{@doc_link}/Delete_draft.html){:target="_blank"}
+  [官方文档](#{@doc_link}/api_draft_delete.html){:target="_blank"}
 
   新增草稿后，开发者可以根据本接口来删除不再需要的草稿，节省空间。**此操作无法撤销，请谨慎操作。**
   """
@@ -48,8 +52,8 @@ defmodule WeChat.DraftBox do
   end
 
   @doc """
-  修改草稿 -
-  [官方文档](#{@doc_link}/Update_draft.html){:target="_blank"}
+  更新草稿 -
+  [官方文档](#{@doc_link}/api_draft_update.html){:target="_blank"}
 
   开发者可通过本接口对草稿进行修改。
   """
@@ -64,7 +68,7 @@ defmodule WeChat.DraftBox do
 
   @doc """
   获取草稿总数 -
-  [官方文档](#{@doc_link}/Count_drafts.html){:target="_blank"}
+  [官方文档](#{@doc_link}/api_draft_count.html){:target="_blank"}
 
   开发者可以根据本接口来获取草稿的总数。此接口只统计数量，不返回草稿的具体内容。
   """
@@ -75,7 +79,7 @@ defmodule WeChat.DraftBox do
 
   @doc """
   获取草稿列表 -
-  [官方文档](#{@doc_link}/Get_draft_list.html){:target="_blank"}
+  [官方文档](#{@doc_link}/api_draft_batchget.html){:target="_blank"}
 
   新增草稿之后，开发者可以获取草稿的列表。
 
@@ -96,7 +100,7 @@ defmodule WeChat.DraftBox do
 
   @doc """
   获取草稿列表(stream) -
-  [官方文档](#{@doc_link}/Get_draft_list.html){:target="_blank"}
+  [官方文档](#{@doc_link}/api_draft_batchget.html){:target="_blank"}
 
   新增草稿之后，开发者可以获取草稿的列表。
 

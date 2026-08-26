@@ -29,8 +29,8 @@ defmodule WeChat.MiniProgram.UrlScheme do
   @type expire_time :: non_neg_integer
 
   @doc """
-  生成的小程序码 -
-  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/qrcode-link/url-scheme/generateScheme.html){:target="_blank"}
+  获取加密scheme码 -
+  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/qrcode-link/url-scheme/api_generatescheme.html){:target="_blank"}
 
   获取小程序scheme码，适用于短信、邮件、外部网页等拉起小程序的业务场景。
   通过该接口，可以选择生成到期失效和永久有效的小程序码，目前仅针对国内非个人主体的小程序开放，

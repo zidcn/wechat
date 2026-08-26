@@ -1,8 +1,8 @@
 defmodule WeChat.MiniProgram.SubscribeMessage do
   @moduledoc """
-  订阅信息
+  订阅信息/一次性订阅消息
 
-  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/subscribe-message.html)
+  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/subscribe-message-overview.html)
   """
   import Jason.Helpers
 
@@ -26,7 +26,7 @@ defmodule WeChat.MiniProgram.SubscribeMessage do
 
   @doc """
   激活与更新服务卡片 -
-  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/mp-message-management/subscribe-message/setUserNotify.html){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/mp-message-management/subscribe-message/api_setusernotify.html){:target="_blank"}
 
   服务卡片详细介绍: [新版一次性订阅消息开发指南](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/subscribe-message-2.html)
   """
@@ -66,7 +66,7 @@ defmodule WeChat.MiniProgram.SubscribeMessage do
 
   @doc """
   查询服务卡片状态 -
-  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/mp-message-management/subscribe-message/getUserNotify.html){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/mp-message-management/subscribe-message/api_getusernotify.html){:target="_blank"}
 
   服务卡片详细介绍: [新版一次性订阅消息开发指南](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/subscribe-message-2.html)
   """
@@ -82,7 +82,7 @@ defmodule WeChat.MiniProgram.SubscribeMessage do
 
   @doc """
   更新服务卡片扩展信息 -
-  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/mp-message-management/subscribe-message/setUserNotifyExt.html){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/mp-message-management/subscribe-message/api_setusernotifyext.html){:target="_blank"}
 
   服务卡片详细介绍: [新版一次性订阅消息开发指南](https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/subscribe-message-2.html)
   """

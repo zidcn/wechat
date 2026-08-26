@@ -2,14 +2,14 @@ defmodule WeChat.CardManaging do
   @moduledoc """
   微信卡券 - 管理卡券
 
-  [官方文档](https://developers.weixin.qq.com/doc/offiaccount/Cards_and_Offer/Managing_Coupons_Vouchers_and_Cards.html){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/doc/service/guide/product/card/Managing_Coupons_Vouchers_and_Cards.html){:target="_blank"}
   """
   import Jason.Helpers
   alias WeChat.Card
   @typep count :: integer
   @typep offset :: integer
 
-  @doc_link "https://developers.weixin.qq.com/doc/offiaccount/Cards_and_Offer/Managing_Coupons_Vouchers_and_Cards.html"
+  @doc_link "https://developers.weixin.qq.com/doc/service/guide/product/card/Managing_Coupons_Vouchers_and_Cards.html"
 
   @doc """
   获取用户已领取卡券 -

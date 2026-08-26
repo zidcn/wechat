@@ -1,14 +1,14 @@
 defmodule WeChat.CustomMessage do
   @moduledoc """
-  消息管理 - 客服消息
+  客服消息/客服消息
 
   同时支持 公众号 & 小程序
-  [官方文档](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/doc/service/guide/product/kf/intro.html){:target="_blank"}
   """
   import Jason.Helpers
   alias WeChat.{Card, Material, Publish}
 
-  @doc_link "https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html"
+  @doc_link "https://developers.weixin.qq.com/doc/service/api/customer/message"
 
   @type template_id :: String.t()
   @type title :: String.t()
@@ -19,7 +19,7 @@ defmodule WeChat.CustomMessage do
 
   @doc """
   客服消息接口 - 发送文本消息 -
-  [官方文档](#{@doc_link}#7){:target="_blank"}
+  [官方文档](#{@doc_link}/api_sendcustommessage.html#Body-text-Object-Payload){:target="_blank"}
 
   发送文本消息时，支持插入跳小程序的文字链
 
@@ -44,7 +44,7 @@ defmodule WeChat.CustomMessage do
 
   @doc """
   客服消息接口 - 发送文本消息 - by某个客服帐号 -
-  [官方文档](#{@doc_link}#7){:target="_blank"}
+  [官方文档](#{@doc_link}/api_sendcustommessage.html#Body-text-Object-Payload){:target="_blank"}
   """
   @spec send_text(WeChat.client(), WeChat.openid(), content, WeChat.CustomService.kf_account()) ::
           WeChat.response()
@@ -62,7 +62,7 @@ defmodule WeChat.CustomMessage do
 
   @doc """
   客服消息接口 - 发送图片消息 -
-  [官方文档](#{@doc_link}#7){:target="_blank"}
+  [官方文档](#{@doc_link}/api_sendcustommessage.html#Body-image-Object-Payload){:target="_blank"}
   """
   @spec send_image(WeChat.client(), WeChat.openid(), WeChat.Material.media_id()) ::
           WeChat.response()
@@ -75,7 +75,7 @@ defmodule WeChat.CustomMessage do
 
   @doc """
   客服消息接口 - 发送语音消息 -
-  [官方文档](#{@doc_link}#7){:target="_blank"}
+  [官方文档](#{@doc_link}/api_sendcustommessage.html#Body-voice-Object-Payload){:target="_blank"}
   """
   @spec send_voice(WeChat.client(), WeChat.openid(), WeChat.Material.media_id()) ::
           WeChat.response()
@@ -88,7 +88,7 @@ defmodule WeChat.CustomMessage do
 
   @doc """
   客服消息接口 - 发送视频消息 -
-  [官方文档](#{@doc_link}#7){:target="_blank"}
+  [官方文档](#{@doc_link}/api_sendcustommessage.html#Body-video-Object-Payload){:target="_blank"}
 
   ## Example
 
@@ -111,7 +111,7 @@ defmodule WeChat.CustomMessage do
 
   @doc """
   客服消息接口 - 发送音乐消息 -
-  [官方文档](#{@doc_link}#7){:target="_blank"}
+  [官方文档](#{@doc_link}/api_sendcustommessage.html#Body-music-Object-Payload){:target="_blank"}
 
   ## Example
 
@@ -135,7 +135,7 @@ defmodule WeChat.CustomMessage do
 
   @doc """
   客服消息接口 - 发送图文消息(点击跳转到外链) -
-  [官方文档](#{@doc_link}#7){:target="_blank"}
+  [官方文档](#{@doc_link}/api_sendcustommessage.html#Body-news-Object-Payload){:target="_blank"}
 
   ## Example
 
@@ -163,7 +163,7 @@ defmodule WeChat.CustomMessage do
 
   @doc """
   客服消息接口 - 发送图文消息(点击跳转到外链) -
-  [官方文档](#{@doc_link}#7){:target="_blank"}
+  [官方文档](#{@doc_link}/api_sendcustommessage.html#Body-news-Object-Payload){:target="_blank"}
   """
   @spec send_news(WeChat.client(), WeChat.openid(), article :: map) :: WeChat.response()
   def send_news(client, openid, article) do
@@ -175,7 +175,7 @@ defmodule WeChat.CustomMessage do
 
   @doc """
   客服消息接口 - 发送图文消息(点击跳转到图文消息页面) -
-  [官方文档](#{@doc_link}#7){:target="_blank"}
+  [官方文档](#{@doc_link}/api_sendcustommessage.html#Body-mpnews-Object-Payload){:target="_blank"}
   """
   @spec send_mp_news(WeChat.client(), WeChat.openid(), Material.media_id()) :: WeChat.response()
   def send_mp_news(client, openid, media_id) do
@@ -187,7 +187,7 @@ defmodule WeChat.CustomMessage do
 
   @doc """
   客服消息接口 - 发送图文消息 by ArticleID (点击跳转到图文消息页面) -
-  [官方文档](#{@doc_link}#7){:target="_blank"}
+  [官方文档](#{@doc_link}/api_sendcustommessage.html#Body-mpnewsarticle-Object-Payload){:target="_blank"}
 
   使用通过 “发布” 系列接口得到的 article_id
   """
@@ -201,7 +201,7 @@ defmodule WeChat.CustomMessage do
 
   @doc """
   客服消息接口 - 发送菜单消息 -
-  [官方文档](#{@doc_link}#7){:target="_blank"}
+  [官方文档](#{@doc_link}/api_sendcustommessage.html#Body-msgmenu-Object-Payload){:target="_blank"}
 
   ## Example
 
@@ -232,7 +232,7 @@ defmodule WeChat.CustomMessage do
 
   @doc """
   客服消息接口 - 发送卡券 -
-  [官方文档](#{@doc_link}#7){:target="_blank"}
+  [官方文档](#{@doc_link}/api_sendcustommessage.html#Body-wxcard-Object-Payload){:target="_blank"}
   """
   @spec send_card(WeChat.client(), WeChat.openid(), Card.card_id()) :: WeChat.response()
   def send_card(client, openid, card_id) do
@@ -244,7 +244,7 @@ defmodule WeChat.CustomMessage do
 
   @doc """
   客服消息接口 - 发送小程序卡片(要求小程序与公众号已关联) -
-  [官方文档](#{@doc_link}#7){:target="_blank"}
+  [官方文档](#{@doc_link}/api_sendcustommessage.html#Body-miniprogrampage-Object-Payload){:target="_blank"}
 
   ## Example
 
@@ -267,7 +267,7 @@ defmodule WeChat.CustomMessage do
 
   @doc """
   客服消息接口 -
-  [官方文档](#{@doc_link}#7){:target="_blank"}
+  [官方文档](#{@doc_link}/api_sendcustommessage.html){:target="_blank"}
   """
   def send_msg(client, body) do
     client.post("/cgi-bin/message/custom/send", body,
@@ -277,7 +277,7 @@ defmodule WeChat.CustomMessage do
 
   @doc """
   客服输入状态 -
-  [官方文档](#{@doc_link}#8){:target="_blank"}
+  [官方文档](#{@doc_link}/api_typing.html){:target="_blank"}
 
   开发者可通过调用“客服输入状态”接口，返回客服当前输入状态给用户。
 

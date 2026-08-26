@@ -4,7 +4,7 @@ defmodule WeChat.Pay.Middleware.XMLBuilder do
 
   Tesla Middleware
 
-  [签名算法](https://pay.weixin.qq.com/wiki/doc/api/micropay.php?chapter=4_3){:target="_blank"}
+  [签名算法](https://pay.weixin.qq.com/doc/v2/merchant/4011985891){:target="_blank"}
   """
   @behaviour Tesla.Middleware
   alias WeChat.Pay.Crypto

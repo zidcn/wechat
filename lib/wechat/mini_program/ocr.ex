@@ -1,6 +1,8 @@
 defmodule WeChat.MiniProgram.OCR do
   @moduledoc """
   小程序 - OCR接口
+
+  [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/img-ocr/){:target="_blank"}
   """
 
   @typep url :: String.t()
@@ -9,7 +11,7 @@ defmodule WeChat.MiniProgram.OCR do
 
   @doc """
   识别银行卡
-  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/img-ocr/ocr/bankCardOCR.html){:target="_blank"}
+  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/img-ocr/ocr/api_bankcardocr.html){:target="_blank"}
 
   本接口提供基于小程序的银行卡 OCR 识别
   """
@@ -22,7 +24,7 @@ defmodule WeChat.MiniProgram.OCR do
 
   @doc """
   营业执照
-  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/img-ocr/ocr/businessLicenseOCR.html){:target="_blank"}
+  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/img-ocr/ocr/api_bizlicenseocr.html){:target="_blank"}
 
   本接口提供基于小程序的营业执照 OCR 识别
   """
@@ -35,7 +37,7 @@ defmodule WeChat.MiniProgram.OCR do
 
   @doc """
   驾驶证
-  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/img-ocr/ocr/driverLicenseOCR.html){:target="_blank"}
+  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/img-ocr/ocr/api_drivinglicenseocr.html){:target="_blank"}
 
   本接口提供基于小程序的驾驶证 OCR 识别
   """
@@ -48,7 +50,7 @@ defmodule WeChat.MiniProgram.OCR do
 
   @doc """
   身份证
-  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/img-ocr/ocr/idCardOCR.html){:target="_blank"}
+  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/img-ocr/ocr/api_idcardocr.html){:target="_blank"}
 
   本接口提供基于小程序的身份证 OCR 识别
   """
@@ -61,7 +63,7 @@ defmodule WeChat.MiniProgram.OCR do
 
   @doc """
   通用印刷体
-  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/img-ocr/ocr/printedTextOCR.html){:target="_blank"}
+  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/img-ocr/ocr/api_commocr.html){:target="_blank"}
 
   本接口提供基于小程序的通用印刷体 OCR 识别
   """
@@ -74,7 +76,7 @@ defmodule WeChat.MiniProgram.OCR do
 
   @doc """
   行驶证
-  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/img-ocr/ocr/vehicleLicenseOCR.html){:target="_blank"}
+  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/img-ocr/ocr/api_drivingocr.html){:target="_blank"}
 
   本接口提供基于小程序的行驶证 OCR 识别
   """

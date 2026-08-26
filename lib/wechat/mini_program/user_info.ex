@@ -7,7 +7,7 @@ defmodule WeChat.MiniProgram.UserInfo do
 
   @doc """
   获取插件用户openpid
-  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/user-info/basic-info/getPluginOpenPId.html){:target="_blank"}
+  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/user-info/basic-info/api_getpluginopenpid.html){:target="_blank"}
   """
   @spec get_plugin_openpid(WeChat.client(), code :: String.t()) :: WeChat.response()
   def get_plugin_openpid(client, code) do
@@ -21,7 +21,7 @@ defmodule WeChat.MiniProgram.UserInfo do
 
   @doc """
   检查加密信息
-  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/user-info/basic-info/checkEncryptedData.html){:target="_blank"}
+  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/user-info/basic-info/api_checkencrypteddata){:target="_blank"}
   """
   @spec check_encrypted_data(WeChat.client(), encrypted_msg_hash :: String.t()) ::
           WeChat.response()
@@ -35,7 +35,7 @@ defmodule WeChat.MiniProgram.UserInfo do
 
   @doc """
   支付后获取用户的`UnionId`
-  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/user-info/basic-info/getPaidUnionid.html){:target="_blank"}
+  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/user-info/basic-info/api_getpaidunionid.html){:target="_blank"}
 
   用户支付完成后，获取该用户的`UnionId`，无需用户授权.
 
@@ -55,7 +55,7 @@ defmodule WeChat.MiniProgram.UserInfo do
 
   @doc """
   支付后获取用户的`UnionId` - 微信支付订单号(`transaction_id`)
-  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/user-info/basic-info/getPaidUnionid.html){:target="_blank"}
+  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/user-info/basic-info/api_getpaidunionid.html){:target="_blank"}
 
   用户支付完成后，获取该用户的`UnionId`，无需用户授权.
 
@@ -77,7 +77,7 @@ defmodule WeChat.MiniProgram.UserInfo do
 
   @doc """
   支付后获取用户的`UnionId` - 微信支付商户订单号和微信支付商户号(`out_trade_no`及`mch_id`)
-  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/user-info/basic-info/getPaidUnionid.html){:target="_blank"}
+  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/user-info/basic-info/api_getpaidunionid.html){:target="_blank"}
 
   用户支付完成后，获取该用户的`UnionId`，无需用户授权.
 
@@ -104,7 +104,7 @@ defmodule WeChat.MiniProgram.UserInfo do
 
   @doc """
   获取用户 EncryptKey
-  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/user-info/internet/getUserEncryptKey.html){:target="_blank"}
+  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/user-info/internet/api_getuserencryptkey.html){:target="_blank"}
   """
   @spec get_user_encrypt_key(WeChat.client(), WeChat.openid(), session_key :: String.t()) ::
           WeChat.response()
@@ -123,7 +123,7 @@ defmodule WeChat.MiniProgram.UserInfo do
 
   @doc """
   手机号快速验证
-  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/user-info/phone-number/getPhoneNumber.html){:target="_blank"}
+  - [官方文档](https://developers.weixin.qq.com/miniprogram/dev/server/API/){:target="_blank"}
   """
   @spec get_phone_number(WeChat.client(), WeChat.openid(), code :: String.t()) ::
           WeChat.response()

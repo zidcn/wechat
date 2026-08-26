@@ -2,15 +2,16 @@ defmodule WeChat.ServerMessage.ReplyMessage do
   @moduledoc """
   被动回复消息
 
-  [官方文档](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Passive_user_reply_message.html){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/doc/service/guide/product/message/Passive_user_reply_message.html){:target="_blank"}
   """
   import WeChat.Utils, only: [def_eex: 2]
 
-  @doc_link "https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Passive_user_reply_message.html"
+  @doc_link "https://developers.weixin.qq.com/doc/service/guide/product/message/Passive_user_reply_message.html"
 
   @doc """
   回包加密 -
-  [官方文档](https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/Message_Encryption/Message_encryption_and_decryption.html)
+  [官方文档](https://developers.weixin.qq.com/doc/service/guide/dev/push/encryption.html)
+  [官方文档](https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/Before_Develop/Message_encryption_and_decryption.html)
 
   ```xml
   <xml>
@@ -34,7 +35,7 @@ defmodule WeChat.ServerMessage.ReplyMessage do
 
   @doc """
   回复文本消息 -
-  [官方文档](#{@doc_link}#0){:target="_blank"}
+  [官方文档](#{@doc_link}#回复文本消息){:target="_blank"}
 
   ```xml
   <xml>
@@ -60,7 +61,7 @@ defmodule WeChat.ServerMessage.ReplyMessage do
 
   @doc """
   回复图片消息 -
-  [官方文档](#{@doc_link}#1){:target="_blank"}
+  [官方文档](#{@doc_link}#回复图片消息){:target="_blank"}
 
   ```xml
   <xml>
@@ -90,7 +91,7 @@ defmodule WeChat.ServerMessage.ReplyMessage do
 
   @doc """
   回复语音消息 -
-  [官方文档](#{@doc_link}#2){:target="_blank"}
+  [官方文档](#{@doc_link}#回复语音消息){:target="_blank"}
 
   ```xml
   <xml>
@@ -120,7 +121,7 @@ defmodule WeChat.ServerMessage.ReplyMessage do
 
   @doc """
   回复视频消息 -
-  [官方文档](#{@doc_link}#3){:target="_blank"}
+  [官方文档](#{@doc_link}#回复视频消息){:target="_blank"}
 
   ```xml
   <xml>
@@ -154,7 +155,7 @@ defmodule WeChat.ServerMessage.ReplyMessage do
 
   @doc """
   回复音乐消息 -
-  [官方文档](#{@doc_link}#4){:target="_blank"}
+  [官方文档](#{@doc_link}#回复音乐消息){:target="_blank"}
 
   ```xml
   <xml>
@@ -201,7 +202,7 @@ defmodule WeChat.ServerMessage.ReplyMessage do
 
   @doc """
   回复图文消息 -
-  [官方文档](#{@doc_link}#5){:target="_blank"}
+  [官方文档](#{@doc_link}#回复图文消息){:target="_blank"}
 
   ```xml
   <xml>
@@ -244,8 +245,36 @@ defmodule WeChat.ServerMessage.ReplyMessage do
   end
 
   @doc """
+  转接AI回复 -
+  [官方文档](#{@doc_link}#回复文本消息){:target="_blank"}
+
+  当用户发送消息给服务号时，服务号开发者服务器回复如下内容，会触发微信公众平台的AI回复。
+
+  注意，需要服务号在微信公众平台上已开启AI回复功能，并且AI已学习完毕历史发表文章。AI回复功能目前在灰度过程中。
+
+  ```xml
+  <xml>
+    <ToUserName><![CDATA[toUser]]></ToUserName>
+    <FromUserName><![CDATA[fromUser]]></FromUserName>
+    <CreateTime>12345678</CreateTime>
+    <MsgType>transfer_biz_ai_ivr</MsgType>
+  </xml>
+  ```
+  """
+  def_eex transfer_ai_msg(to_openid, from_wx_no, timestamp) do
+    """
+    <xml>
+      <ToUserName><![CDATA[<%= to_openid %>]]></ToUserName>
+      <FromUserName><![CDATA[<%= from_wx_no %>]]></FromUserName>
+      <CreateTime><%= timestamp %></CreateTime>
+      <MsgType>transfer_biz_ai_ivr</MsgType>
+    </xml>
+    """
+  end
+
+  @doc """
   消息转发客服消息 -
-  [官方文档](https://developers.weixin.qq.com/doc/offiaccount/Customer_Service/Forwarding_of_messages_to_service_center.html){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/doc/service/guide/product/kf/forwarding.html){:target="_blank"}
 
   ```xml
   <xml>
@@ -269,7 +298,7 @@ defmodule WeChat.ServerMessage.ReplyMessage do
 
   @doc """
   消息转发到指定客服 -
-  [官方文档](https://developers.weixin.qq.com/doc/offiaccount/Customer_Service/Forwarding_of_messages_to_service_center.html){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/doc/service/guide/product/kf/forwarding.html){:target="_blank"}
 
   ```xml
   <xml>

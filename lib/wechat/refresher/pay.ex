@@ -4,7 +4,7 @@ defmodule WeChat.Refresher.Pay do
 
   每 12 小时检查 更新证书
 
-  [下载平台证书](https://pay.weixin.qq.com/docs/merchant/apis/platform-certificate/api-v3-get-certificates/get.html)
+  [下载平台证书](https://pay.weixin.qq.com/doc/v3/merchant/4012551764){:target="_blank"}
   """
   use GenServer
   require Logger

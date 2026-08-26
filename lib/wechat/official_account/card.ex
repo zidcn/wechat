@@ -2,7 +2,7 @@ defmodule WeChat.Card do
   @moduledoc """
   微信卡券
 
-  [官方文档](https://developers.weixin.qq.com/doc/offiaccount/Cards_and_Offer/WeChat_Coupon_Interface.html){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/doc/service/guide/product/card/WeChat_Coupon_Interface.html){:target="_blank"}
   """
   import Jason.Helpers
 

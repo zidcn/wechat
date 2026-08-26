@@ -1,12 +1,13 @@
 if Code.ensure_loaded?(Plug) do
   defmodule WeChat.ServerMessage.EventHelper do
     @moduledoc """
-    微信推送消息处理
+    消息推送
 
     ## API Docs
-      * [接入概述](https://developers.weixin.qq.com/doc/offiaccount/Basic_Information/Access_Overview.html){:target="_blank"}
-      * [接入指引](https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/Message_Encryption/Message_encryption_and_decryption.html){:target="_blank"}
-      * [接入技术方案](https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/Message_Encryption/Technical_Plan.html){:target="_blank"}
+      * [消息与事件推送介绍](https://developers.weixin.qq.com/doc/service/guide/dev/push/){:target="_blank"}
+      * [消息推送介绍](https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/Before_Develop/message_push.html){:target="_blank"}
+      * [消息加解密说明](https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/Before_Develop/Message_encryption_and_decryption.html){:target="_blank"}
+      * [加密解密技术方案](https://developers.weixin.qq.com/doc/oplatform/Third-party_Platforms/2.0/Before_Develop/Technical_Plan.html){:target="_blank"}
 
     ## 增加 saxy 依赖
 

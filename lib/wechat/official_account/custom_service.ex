@@ -1,13 +1,13 @@
 defmodule WeChat.CustomService do
   @moduledoc """
-  客服帐号管理
+  客服消息/客服管理
 
-  [官方文档](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html#0){:target="_blank"}
+  [官方文档](https://developers.weixin.qq.com/doc/service/guide/product/kf/intro.html){:target="_blank"}
   """
   import Jason.Helpers
   alias Tesla.Multipart
 
-  @doc_link "https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html"
+  @doc_link "https://developers.weixin.qq.com/doc/service/api/customer/servicermanage"
 
   @typedoc """
   完整客服账号，格式为：账号前缀@公众号微信号
@@ -24,7 +24,7 @@ defmodule WeChat.CustomService do
 
   @doc """
   添加客服帐号 -
-  [官方文档](#{@doc_link}#1){:target="_blank"}
+  [官方文档](#{@doc_link}/api_addkfaccount.html){:target="_blank"}
 
   每个公众号最多添加100个客服账号。
   """
@@ -39,7 +39,7 @@ defmodule WeChat.CustomService do
 
   @doc """
   修改客服帐号 -
-  [官方文档](#{@doc_link}#2){:target="_blank"}
+  [官方文档](#{@doc_link}/api_updatekfaccount.html){:target="_blank"}
   """
   @spec update_kf_account(WeChat.client(), kf_account, nickname, password) :: WeChat.response()
   def update_kf_account(client, kf_account, nickname, password) do
@@ -52,7 +52,7 @@ defmodule WeChat.CustomService do
 
   @doc """
   删除客服帐号 -
-  [官方文档](#{@doc_link}#3){:target="_blank"}
+  [官方文档](#{@doc_link}/api_delkfaccount.html){:target="_blank"}
   """
   @spec del_kf_account(WeChat.client(), kf_account, nickname, password) :: WeChat.response()
   def del_kf_account(client, kf_account, nickname, password) do
@@ -64,8 +64,8 @@ defmodule WeChat.CustomService do
   end
 
   @doc """
-  设置客服帐号的头像 -
-  [官方文档](#{@doc_link}#4){:target="_blank"}
+  设置客服头像 -
+  [官方文档](#{@doc_link}/api_uploadkfheadimg.html){:target="_blank"}
 
   头像图片文件必须是jpg格式，推荐使用640*640大小的图片以达到最佳效果。
   """
@@ -84,8 +84,8 @@ defmodule WeChat.CustomService do
   end
 
   @doc """
-  设置客服帐号的头像(binary) -
-  [官方文档](#{@doc_link}#4){:target="_blank"}
+  设置客服头像(binary) -
+  [官方文档](#{@doc_link}/api_uploadkfheadimg.html){:target="_blank"}
 
   头像图片文件必须是jpg格式，推荐使用640*640大小的图片以达到最佳效果。
   """
@@ -106,7 +106,7 @@ defmodule WeChat.CustomService do
 
   @doc """
   获取所有客服账号 -
-  [官方文档](#{@doc_link}#5){:target="_blank"}
+  [官方文档](#{@doc_link}/api_getkflist.html){:target="_blank"}
 
   获取公众号中所设置的客服基本信息，包括客服工号、客服昵称、客服登录账号。
   """

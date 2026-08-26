@@ -5,7 +5,7 @@ defmodule WeChat.MiniProgram.Live.Room do
   import Jason.Helpers
   alias WeChat.{User, MiniProgram.Live.Goods}
 
-  @doc_link "https://developers.weixin.qq.com/miniprogram/dev/framework/liveplayer/studio-api.html"
+  @doc_link "https://developers.weixin.qq.com/miniprogram/dev/platform-capabilities/industry/liveplayer/studio-api.html"
 
   @type start :: integer
   @type limit :: 1..100

@@ -5,7 +5,7 @@ defmodule WeChat.MiniProgram.Live.Subscribe do
   import Jason.Helpers
   alias WeChat.MiniProgram.Live.Room
 
-  @doc_link "https://developers.weixin.qq.com/miniprogram/dev/framework/liveplayer/subscribe-api.html"
+  @doc_link "https://developers.weixin.qq.com/miniprogram/dev/platform-capabilities/industry/liveplayer/subscribe-api.html"
 
   @type limit :: 1..2000
   @typedoc "翻页标记，获取第一页时不带，第二页开始需带上上一页返回结果中的page_break"

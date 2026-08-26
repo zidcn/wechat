@@ -3,7 +3,7 @@ if Code.ensure_loaded?(Plug) do
     @moduledoc """
     网页授权
 
-    [官方文档](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/Wechat_webpage_authorization.html){:target="_blank"}
+    [官方文档](https://developers.weixin.qq.com/doc/service/guide/h5/auth.html){:target="_blank"}
 
     工作流程:
 

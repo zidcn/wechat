@@ -106,8 +106,6 @@ defmodule WeChat.MixProject do
       {"Hub", [WeChat.HubClient, WeChat.HubServer, WeChat.Plug.HubExposer]},
       {"Other APIs",
        [
-         # 微信门店
-         WeChat.POI,
          # 自定义菜单
          WeChat.Menu,
          # 图文消息留言管理
