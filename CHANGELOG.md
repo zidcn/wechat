@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.20.1 (2026-08-27)
+- 修复动态构建 client 的 bug: `WeChat` / `WeChat.Pay` / `WeChat.Work` 的 `build_client/2` 在 `Module.create` 抛出异常时, 全局编译选项 `ignore_module_conflict` 不会被恢复; 增加 `try/after` 保护, 确保 `Code.compiler_options(ignore_module_conflict: false)` 无论成功还是失败都会被调用
+- fix issues #11, thanks @sundevilyang
+
 ## v0.20.0 (2026-08-26)
 - 新增 微信支付公钥 支持: `use WeChat.Pay` 可配置 `platform_public_id` / `platform_public_key`, 配置后代替平台证书, 用于验签与敏感信息加解密, 并跳过平台证书的下载与存储
   - `client.public_key/0` 始终返回商户公钥(由商户私钥推导); 配置平台公钥后, `encrypt_secret_data/1` 使用平台公钥加密
@@ -11,6 +15,7 @@
 - 新增 `WeChat.ServerMessage.ReplyMessage.transfer_ai_msg/3` 转接AI回复
 - 更新微信官方文档链接
 - 更新依赖(tesla / finch / plug / ex_doc 等)
+- fix issues #10, thanks @sundevilyang
 
 ## v0.19.0 (2025-10-22)
 - remove `client.get/3` & `client.post/4`

@@ -177,7 +177,7 @@ defmodule WeChat.Pay do
   def build_client(client, options) do
     Code.compiler_options(ignore_module_conflict: true)
 
-    result =
+    try do
       with {:module, module, _binary, _term} <-
              Module.create(
                client,
@@ -189,9 +189,9 @@ defmodule WeChat.Pay do
              ) do
         {:ok, module}
       end
-
-    Code.compiler_options(ignore_module_conflict: false)
-    result
+    after
+      Code.compiler_options(ignore_module_conflict: false)
+    end
   end
 
   @doc "动态启动 client"
