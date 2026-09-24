@@ -33,7 +33,7 @@ defmodule WeChat.Builder.OfficialAccount do
     Utils.warn_unknown_option(opts, @known_option_keys, client)
     default_opts = Keyword.merge(@default_opts, opts)
 
-    if !(Keyword.get(default_opts, :appid) |> is_binary()) do
+    if !(Keyword.get(default_opts, :appid)) do
       raise ArgumentError, "please set appid option for #{inspect(client)}"
     end
 
