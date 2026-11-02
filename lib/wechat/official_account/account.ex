@@ -17,12 +17,13 @@ defmodule WeChat.Account do
   """
   @spec get_access_token(WeChat.client()) :: WeChat.response()
   def get_access_token(client) do
-    client.get("/cgi-bin/token",
-      query: [
+    client.post("/cgi-bin/stable_token",
+      json_map(
         grant_type: "client_credential",
         appid: client.appid(),
         secret: client.appsecret()
-      ]
+      ),
+      []
     )
   end
 

@@ -2,6 +2,8 @@ defmodule WeChat.MiniProgram.Auth do
   @moduledoc """
   小程序 - 权限接口
   """
+  import Jason.Helpers
+
   alias WeChat.Storage.Cache
   alias WeChat.MiniProgram.UserInfo
 
@@ -117,12 +119,13 @@ defmodule WeChat.MiniProgram.Auth do
   """
   @spec get_access_token(WeChat.client()) :: WeChat.response()
   def get_access_token(client) do
-    client.get("/cgi-bin/token",
-      query: [
+    client.post("/cgi-bin/stable_token",
+      json_map(
         grant_type: "client_credential",
         appid: client.appid(),
         secret: client.appsecret()
-      ]
+      ),
+      []
     )
   end
 end

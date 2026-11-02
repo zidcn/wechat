@@ -23,6 +23,9 @@ defmodule WeChat.Test.Mock do
   defp api(%{method: :get, url: "/cgi-bin/token"}),
     do: json(%{"access_token" => "ACCESS_TOKEN", "expires_in" => @expires_in})
 
+  defp api(%{method: :get, url: "/cgi-bin/stable_token"}),
+    do: json(%{"access_token" => "ACCESS_TOKEN", "expires_in" => @expires_in})
+
   defp api(%{method: :post, url: "/cgi-bin/component/api_component_token"}),
     do: json(%{"component_access_token" => "COMPONENT_ACCESS_TOKEN", "expires_in" => @expires_in})
 
